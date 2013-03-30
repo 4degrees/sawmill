@@ -5,5 +5,8 @@
 from .handler.distribute import Distribute
 
 #: Top level handler responsible for relaying all logs to other handlers.
-handle = Distribute()
+handler = Distribute()
+handlers = handler.handlers
+handle = handler.handle
+
 
