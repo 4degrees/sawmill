@@ -32,7 +32,7 @@ class Log(MutableMapping):
         '''Set *key* to reference *value*.'''
         self._mapping[key] = value
 
-    def __delitem(self, key):
+    def __delitem__(self, key):
         '''Remove *key* reference.'''
         del self._mapping[key]
 
