@@ -3,6 +3,7 @@
 # :license: See LICENSE.txt.
 
 import atexit
+import copy
 from abc import ABCMeta, abstractmethod
 
 
@@ -41,7 +42,7 @@ class Handler(object):
         if self.filterer is not None and self.filterer.filter(log):
             return
 
-        data = log
+        data = copy.deepcopy(log)
         if self.formatter is not None:
             data = self.formatter.format(log)
 
