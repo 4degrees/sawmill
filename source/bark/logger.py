@@ -17,10 +17,16 @@ class Logger(Log):
 
     '''
 
-    def __init__(self, name, **kw):
-        '''Initialise logger with identifying *name*.'''
+    def __init__(self, name, _handle=bark.handle, **kw):
+        '''Initialise logger with identifying *name*.
+
+        If you need to override the default handle then pass in a custom 
+        *_handle*
+
+        '''
         kw['name'] = name
         super(Logger, self).__init__(**kw)
+        self._handle = _handle
 
     def log(self, message, **kw):
         '''Emit a :py:class:`~bark.log.Log` record.
@@ -33,6 +39,5 @@ class Logger(Log):
         log.update(**kw)
         log['message'] = message
 
-        # Call global handle method.
-        bark.handle(log)
+        self._handle(log)
 
