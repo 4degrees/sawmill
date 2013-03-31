@@ -26,3 +26,23 @@ class Classic(Logger):
     def log(self, message, **kw):
         '''Log a *message* with additional *kw* arguments.'''
         super(Classic, self).log(message, **kw)
+
+    def debug(self, message, **kw):
+        '''Log a debug level *message*.'''
+        kw['level'] = 'debug'
+        self.log(message, **kw)
+
+    def info(self, message, **kw):
+        '''Log an info level *message*.'''
+        kw['level'] = 'info'
+        self.log(message, **kw)
+
+    def warning(self, message, **kw):
+        '''Log a warning level *message*.'''
+        kw['level'] = 'warning'
+        self.log(message, **kw)
+
+    def error(self, message, **kw):
+        '''Log an error level *message*.'''
+        kw['level'] = 'error'
+        self.log(message, **kw)
