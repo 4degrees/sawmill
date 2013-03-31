@@ -17,27 +17,29 @@ class Logger(Log):
 
     '''
 
-    def __init__(self, name, _handle=bark.handle, **kw):
-        '''Initialise logger with identifying *name*.
+    def __init__(self, _handle=bark.handle, **kw):
+        '''Initialise logger.
 
-        If you need to override the default handle then pass in a custom 
+        If you need to override the default handle then pass in a custom
         *_handle*
 
         '''
-        kw['name'] = name
         super(Logger, self).__init__(**kw)
         self._handle = _handle
 
-    def log(self, message, **kw):
-        '''Emit a :py:class:`~bark.log.Log` record.
+    def prepare(self, *args, **kw):
+        '''Prepare and return a log for emission.
 
-        A copy of this logger's information is made and then merged with the
-        passed in *kw* arguments before being emitted.
+        *kw* arguments are automatically mixed in to a
+        :py:class:`~bark.log.Log` record made by copying this current logger.
 
         '''
         log = copy.deepcopy(self)
         log.update(**kw)
-        log['message'] = message
+        return log
 
+    def log(self, *args, **kw):
+        '''Emit a :py:class:`~bark.log.Log` record.'''
+        log = self.prepare(*args, **kw)
         self._handle(log)
 
