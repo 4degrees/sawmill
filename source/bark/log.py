@@ -19,6 +19,7 @@ class Log(MutableMapping):
 
     def __len__(self):
         '''Return number of keys.'''
+        return len(self._mapping)
 
     def __iter__(self):
         '''Return iterator over object.'''
