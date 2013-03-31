@@ -5,7 +5,7 @@
 import copy
 
 import bark
-from .log import Log
+from ..log import Log
 
 
 class Logger(Log):
@@ -17,15 +17,15 @@ class Logger(Log):
 
     '''
 
-    def __init__(self, _handle=bark.handle, **kw):
+    def __init__(self, _handler=bark.handler, **kw):
         '''Initialise logger.
 
-        If you need to override the default handle then pass in a custom
-        *_handle*
+        If you need to override the default handler then pass in a custom
+        *_handler*
 
         '''
         super(Logger, self).__init__(**kw)
-        self._handle = _handle
+        self._handler = _handler
 
     def prepare(self, *args, **kw):
         '''Prepare and return a log for emission.
@@ -41,5 +41,5 @@ class Logger(Log):
     def log(self, *args, **kw):
         '''Emit a :py:class:`~bark.log.Log` record.'''
         log = self.prepare(*args, **kw)
-        self._handle(log)
+        self._handler.handle(log)
 
