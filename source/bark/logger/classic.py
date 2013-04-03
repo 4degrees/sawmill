@@ -2,10 +2,10 @@
 # :copyright: Copyright (c) 2013 Martin Pengelly-Phillips
 # :license: See LICENSE.txt.
 
-from .base import Logger
+from .dynamic import Dynamic
 
 
-class Classic(Logger):
+class Classic(Dynamic):
     '''Classic logger compatible with standard Python logger.'''
 
     def __init__(self, name, **kw):
