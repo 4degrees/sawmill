@@ -56,11 +56,23 @@ html_copy_source = True
 
 # -- Autodoc ------------------------------------------------------------------
 
-autoclass_content = 'both'
+autodoc_default_flags = ['members', 'undoc-members', 'show-inheritance']
+
+def autodoc_skip(app, what, name, obj, skip, options):
+    '''Don't skip __init__ method for autodoc.'''
+    if name == '__init__':
+        return False
+
+    return skip
 
 
 # -- Intersphinx --------------------------------------------------------------
 
 intersphinx_mapping = {'python':('http://docs.python.org/', None)}
 
+
+# -- Setup --------------------------------------------------------------------
+
+def setup(app):
+    app.connect('autodoc-skip-member', autodoc_skip)
 
