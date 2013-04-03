@@ -2,6 +2,8 @@
 # :copyright: Copyright (c) 2013 Martin Pengelly-Phillips
 # :license: See LICENSE.txt.
 
+import collections
+
 from .base import Logger
 
 
@@ -16,7 +18,7 @@ class Dynamic(Logger):
 
         '''
         value = self._mapping[key]
-        if callable(value):
+        if isinstance(value, collections.Callable):
             self[key] = value = value()
 
         return value
