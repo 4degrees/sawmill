@@ -31,8 +31,7 @@ class Level(Filterer):
         .. note::
 
             If the log has no level information (or a level not present in the
-            current :py:attr`bark.levels` array) it will pass the
-            filter successfully.
+            current levels array) it will pass the filter successfully.
 
         '''
         level = log.get('level')
