@@ -3,7 +3,6 @@
 # :license: See LICENSE.txt.
 
 import atexit
-import copy
 from abc import ABCMeta, abstractmethod
 
 
