@@ -10,5 +10,6 @@
 .. toctree::
     :glob:
 
+    log
     */index
 
