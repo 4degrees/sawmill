@@ -33,7 +33,7 @@ def configure(configurator='classic', *args, **kw):
     '''Configure Bark using *configurator*.
 
     Will call registered configuration function matching the *configurator*
-    name with *args, and **kw.
+    name with *args*, and *kw*.
 
     '''
     configurator = configurators.get(configurator)
