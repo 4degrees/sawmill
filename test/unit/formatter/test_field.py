@@ -12,7 +12,7 @@ def test_format():
     '''Test formatted log result is as expected.'''
     log = Log(message='A message', level='info')
     template = Field(keys=['level', 'message'])
-    assert template.format(log) == 'level=info:message=A message'
+    assert template.format(log) == 'level=info:message=A message\n'
 
 
 def test_alternative_template():
@@ -20,21 +20,21 @@ def test_alternative_template():
     log = Log(message='A message')
 
     template = Field(keys=['level', 'message'], template='{value}')
-    assert template.format(log) == 'A message'
+    assert template.format(log) == 'A message\n'
 
 
 def test_alternative_separator():
     '''Test configuring the separator'''
     log = Log(message='A message', level='info')
     template = Field(keys=['level', 'message'], item_separator=', ')
-    assert template.format(log) == 'level=info, message=A message'
+    assert template.format(log) == 'level=info, message=A message\n'
 
 
 def test_no_error_with_missing_values():
     '''Test missing values replaced correctly when mode is IGNORE.'''
     log = Log(message='A message')
     template = Field(keys=['level', 'message'], mode=Field.IGNORE)
-    assert template.format(log) == 'level=:message=A message'
+    assert template.format(log) == 'level=:message=A message\n'
 
 
 def test_error_with_missing_values():

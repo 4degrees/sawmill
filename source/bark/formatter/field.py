@@ -45,5 +45,5 @@ class Field(Formatter):
             if entry:
                 data.append(entry)
 
-        return self.item_separator.join(data)
+        return '{0}\n'.format(self.item_separator.join(data))
 
