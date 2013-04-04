@@ -34,7 +34,7 @@ class Logger(Log):
         :py:class:`~bark.log.Log` record made by copying this current logger.
 
         '''
-        log = copy.deepcopy(self)
+        log = self.clone()
         log.update(**kw)
         return log
 

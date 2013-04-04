@@ -2,6 +2,7 @@
 # :copyright: Copyright (c) 2013 Martin Pengelly-Phillips
 # :license: See LICENSE.txt.
 
+import copy
 from collections import MutableMapping
 
 
@@ -12,6 +13,18 @@ class Log(MutableMapping):
         '''Initialise log.'''
         super(Log, self).__init__()
         self._mapping = dict(*args, **kw)
+
+    def clone(self):
+        '''Return a clone of this log.
+
+        This is a mixture of shallow and deep copies where the log instance
+        and its attributes are shallow copied, but the actual mapping (items)
+        are deepcopied.
+
+        '''
+        log = copy.copy(self)
+        log._mapping = copy.deepcopy(self._mapping)
+        return log
 
     def __str__(self):
         '''Return string representation.'''
