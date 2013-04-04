@@ -42,7 +42,7 @@ class Handler(object):
         if self.filterer is not None and self.filterer.filter(log):
             return
 
-        data = copy.deepcopy(log)
+        data = log
         if self.formatter is not None:
             data = self.formatter.format(log)
 
@@ -50,5 +50,11 @@ class Handler(object):
 
     @abstractmethod
     def output(self, data):
-        '''Output formatted *data*.'''
+        '''Output formatted *data*.
+
+        .. warning::
+
+            *data* may be shared and should not be altered.
+
+        '''
 

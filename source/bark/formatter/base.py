@@ -18,4 +18,10 @@ class Formatter(object):
 
     @abstractmethod
     def format(self, log):
-        '''Return formatted data representing *log*.'''
+        '''Return formatted data representing *log*.
+
+        .. warning::
+
+            *log* may be shared and should not be altered.
+
+        '''
