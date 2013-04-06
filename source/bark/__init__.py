@@ -3,7 +3,6 @@
 # :license: See LICENSE.txt.
 
 from .handler.distribute import Distribute
-from .configurator import classic
 
 #: Top level handler responsible for relaying all logs to other handlers.
 handler = Distribute()
@@ -24,6 +23,8 @@ levels = [
 
 #: Configurators registered for use with the :py:func:`bark.configure`
 #: function.
+from .configurator import classic
+
 configurators = {
     'classic': classic.configure
 }

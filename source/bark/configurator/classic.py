@@ -2,8 +2,14 @@
 # :copyright: Copyright (c) 2013 Martin Pengelly-Phillips
 # :license: See LICENSE.txt.
 
+import sys
 import tempfile
 from datetime import datetime
+
+import bark
+from bark.handler.stream import Stream
+from bark.filterer.level import Level
+from bark.formatter.field import Field
 
 
 def configure(level='info', filepath=None, *args, **kw):
@@ -14,12 +20,6 @@ def configure(level='info', filepath=None, *args, **kw):
     temporary file named after the current date and time.
 
     '''
-    import sys
-    import bark
-    from bark.handler.stream import Stream
-    from bark.filterer.level import Level
-    from bark.formatter.field import Field
-
     stderr_handler = Stream(
         sys.stderr,
         filterer=Level(min=level, max=None),
