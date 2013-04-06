@@ -13,7 +13,7 @@ def test_create():
     assert log.items() == [('name', 'bark.test.log')]
 
 
-def test_string_represenation():
+def test_string_representation():
     '''Test string representation of Log instance.'''
     log = Log(name='bark.test.log')
     assert str(log) == "{'name': 'bark.test.log'}"
