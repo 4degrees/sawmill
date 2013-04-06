@@ -25,7 +25,7 @@ def configure(level='info', filepath=None, *args, **kw):
         filterer=Level(min=level, max=None),
         formatter=Field(keys=['level', 'name', 'message'], template='{value}')
     )
-    bark.handler.handlers['stderr'] = stderr_handler
+    bark.handlers['stderr'] = stderr_handler
 
     if filepath is None:
         prefix = datetime.now().strftime('bark-%Y_%m_%d-%H_%M_%S-')
@@ -37,5 +37,5 @@ def configure(level='info', filepath=None, *args, **kw):
         filterer=Level(min=None, max=None),
         formatter=Field(keys=['level', 'name', 'message'])
     )
-    bark.handler.handlers['file'] = file_handler
+    bark.handlers['file'] = file_handler
 

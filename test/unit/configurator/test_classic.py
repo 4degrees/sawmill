@@ -16,13 +16,13 @@ def test_classic_configurator_with_no_options():
     '''Test classic configurator when passed no options.'''
     with nested(
         mock.patch('sys.stderr', new_callable=StringIO),
-        mock.patch.dict(bark.handler.handlers, clear=True)
+        mock.patch.dict(bark.handlers, clear=True)
     ) as (stderr, handlers):
-        assert len(bark.handler.handlers) == 0
+        assert len(bark.handlers) == 0
 
         # Check handlers added under expected keys
         classic.configure()
-        assert sorted(bark.handler.handlers.keys()) == ['file', 'stderr']
+        assert sorted(bark.handlers.keys()) == ['file', 'stderr']
 
         # Check stderr handler
         assert stderr.getvalue() == ''
@@ -36,8 +36,8 @@ def test_classic_configurator_with_no_options():
         assert stderr.getvalue() == ''
 
         # Check file handler
-        bark.handler.handlers['file'].flush()
-        filepath = bark.handler.handlers['file'].stream.name
+        bark.handlers['file'].flush()
+        filepath = bark.handlers['file'].stream.name
         with open(filepath, 'r') as file:
             contents = file.read()
             expected = (
