@@ -12,4 +12,5 @@ Overview and examples of using the system in practice.
     :maxdepth: 1
 
     introduction
+    getting_started
 
