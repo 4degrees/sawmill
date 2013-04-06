@@ -21,10 +21,12 @@ levels = [
     'error'
 ]
 
-#: Configurators registered for use with the :py:func:`bark.configure`
-#: function.
+# Import configurators here to avoid configurators getting null references
+# to above variables.
 from .configurator import classic
 
+#: Configurators registered for use with the :py:func:`bark.configure`
+#: function.
 configurators = {
     'classic': classic.configure
 }
