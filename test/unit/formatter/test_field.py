@@ -46,3 +46,18 @@ def test_error_with_missing_values():
         template.format(log)
 
 
+@pytest.mark.parametrize(('keys', 'expected'), [
+    (['*', 'level', 'message'], 'a=3:b=2:z=1:level=info:message=A message\n'),
+    (['level', '*', 'message'], 'level=info:a=3:b=2:z=1:message=A message\n'),
+    (['level', 'message', '*'], 'level=info:message=A message:a=3:b=2:z=1\n'),
+    (['*'], 'a=3:b=2:level=info:message=A message:z=1\n'),
+    (['*', '*'], ('a=3:b=2:level=info:message=A message:z=1:'
+                  'a=3:b=2:level=info:message=A message:z=1\n'))
+])
+def test_include_remaining_keys(keys, expected):
+    '''Test using '*' to include remaining keys in alphabetical order.'''
+    log = Log(level='info', message='A message', a=3, b=2, z=1)
+
+    template = Field(keys=keys)
+    assert template.format(log) == expected
+

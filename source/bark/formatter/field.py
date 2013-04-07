@@ -9,15 +9,19 @@ class Field(Formatter):
     '''Format :py:class:`~bark.log.Log` to string according to item list.'''
 
     IGNORE, ERROR = ('ignore', 'error')
+    REMAINING = '*'
 
     def __init__(self, keys, mode=IGNORE, template='{key}={value}',
                  item_separator=':'):
         '''Initialise formatter with *keys* to look for in specific order.
 
+        *keys* may contain :py:attr:`REMAINING` at any point to include all
+        remaining unspecified keys in alphabetical order.
+
         *mode* determines how to handle a missing key when formatting a log.
-        The default IGNORE will substitute an empty string for the missing
-        value. An alternative is ERROR, which would cause an error to be
-        raised.
+        The default :py:attr:`IGNORE` will substitute an empty string for the
+        missing value. An alternative is :py:attr:`ERROR`, which would cause an
+        error to be raised.
 
         *template* is used to format the key and value of each field and
         *item_separator* will separate each item.
@@ -32,7 +36,19 @@ class Field(Formatter):
     def format(self, log):
         '''Return formatted data representing *log*.'''
         data = []
-        for key in self.keys:
+
+        # Expand keys.
+        keys = self.keys[:]
+        remaining = sorted(set(log.keys()) - set(keys))
+        expanded = []
+        for key in keys:
+            if key == self.REMAINING:
+                expanded.extend(remaining)
+            else:
+                expanded.append(key)
+
+        # Format string.
+        for key in expanded:
             if not key in log:
                 if self.mode is self.ERROR:
                     raise KeyError()
