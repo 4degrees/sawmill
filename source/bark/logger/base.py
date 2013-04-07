@@ -15,7 +15,7 @@ class Logger(Log):
 
     '''
 
-    def __init__(self, _handler=bark.handler, **kw):
+    def __init__(self, _handler=bark.root, **kw):
         '''Initialise logger.
 
         If you need to override the default handler then pass in a custom

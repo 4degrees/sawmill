@@ -12,11 +12,11 @@ Using Bark is straightforward::
     >>> import bark
     >>> from bark.log import Log
     >>> bark.configure()
-    >>> bark.handle(Log(message='Hello World!'))
+    >>> bark.root.handle(Log(message='Hello World!'))
     Hello World!
 
 Voila! You asked Bark to :py:func:`~bark.configure` itself in a classic
-fashion and then called the main :py:data:`~bark.handle` method with a
+fashion and then called the main :py:data:`~bark.root.handle` method with a
 :py:class:`~bark.log.Log` instance. The resulting message appeared on
 :py:attr:`sys.stderr`.
 
@@ -61,7 +61,7 @@ Handlers
 So, how are those messages ending up on :py:attr:`sys.stderr`? This is because
 the configure function adds a :py:class:`~bark.handler.stream.Stream` handler
 configured to output all messages to standard error. It does this by
-registering the handler with the root :py:data:`~bark.handler` which, by
+registering the handler with the :py:data:`~bark.root` handler which, by
 default, is a :py:class:`~bark.handler.distribute.Distribute` handler. The
 distribute handler simply relays all the logs it receives to other handlers
 registered with it.
@@ -77,7 +77,7 @@ to a :py:class:`~StringIO.StringIO` instance::
 All that you have to do to register a handler with a distribute handler is
 set it with a unique key on the handlers dictionary of the distribute handler::
 
-    >>> bark.handlers['my_handler'] = my_handler
+    >>> bark.root.handlers['my_handler'] = my_handler
 
 Now we can log as normal using our logger from before::
 
@@ -153,13 +153,13 @@ up under a distribute handler and then set the filterer on that handler. For
 example, here is how to limit all the handlers using a filterer on the root
 handler::
 
-    >>> bark.handler.filterer = Level(min='error', max=None)
+    >>> bark.root.filterer = Level(min='error', max=None)
     >>> logger.info('I will not appear anywhere.')
 
 You can also quickly combine different filterers for more complex effects::
 
     >>> from bark.filterer.pattern import Pattern
-    >>> bark.handler.filterer |= Pattern('my\..*')
+    >>> bark.root.filterer |= Pattern('my\..*')
 
 The above would filter any log that had too low a level *or* had a name value
 that started with 'my.'.

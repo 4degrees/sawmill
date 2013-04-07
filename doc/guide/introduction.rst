@@ -34,10 +34,13 @@ Here are some examples of how Bark differs:
 * Filterers and formatters are only defined for handlers so it is clearer
   where to use them (though potentially more restrictive).
 
-* Easy to change the root handler (:py:attr:`bark.handler`).
+* Easy to change the root handler (:py:attr:`bark.root`).
 
 * Requires Python 2.6 or higher.
 
 * Follows PEP8.
+
+Installation
+------------
 
 
