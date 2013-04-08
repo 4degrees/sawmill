@@ -3,9 +3,10 @@
 # :license: See LICENSE.txt.
 
 from .dynamic import Dynamic
+from .traceback import Traceback
 
 
-class Classic(Dynamic):
+class Classic(Dynamic, Traceback):
     '''Classic logger compatible with standard Python logger.'''
 
     def __init__(self, name, **kw):
@@ -14,12 +15,7 @@ class Classic(Dynamic):
         super(Classic, self).__init__(**kw)
 
     def prepare(self, message, **kw):
-        '''Emit a :py:class:`~bark.log.Log` record.
-
-        A copy of this logger's information is made and then merged with the
-        passed in *kw* arguments before being emitted.
-
-        '''
+        '''Prepare and return a log for emission.'''
         kw['message'] = message
         return super(Classic, self).prepare(**kw)
 
