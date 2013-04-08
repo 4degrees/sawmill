@@ -31,29 +31,35 @@ class Pattern(Filterer):
         self.key = key
         self.mode = mode
 
-    def filter(self, log):
-        '''Filter *log* based on pattern matching.
+    def filter(self, logs):
+        '''Filter *logs* based on pattern matching.
 
-        If the log does not have the key to test against it will pass the
+        If a log does not have the key to test against it will pass the
         filter successfully. If the key is present, but not a string then the
         log will be filtered.
 
         '''
-        # If key was not present then pass filter
-        if self.key not in log:
-            return False
+        passed = []
+        for log in logs:
+            # If key was not present then pass filter
+            if self.key not in log:
+                passed.append(log)
+                continue
 
-        value = log[self.key]
+            value = log[self.key]
 
-        # If not a string then can't test pattern against it so fail filter.
-        if not isinstance(value, basestring):
-            return True
+            # If not a string then can't test pattern against it so fail filter.
+            if not isinstance(value, basestring):
+                continue
 
-        matched = self.pattern.search(value)
-        if matched and self.mode == self.EXCLUDE:
-            return True
+            matched = self.pattern.search(value)
+            if matched and self.mode == self.EXCLUDE:
+                continue
 
-        if not matched and self.mode == self.INCLUDE:
-            return True
+            if not matched and self.mode == self.INCLUDE:
+                continue
 
-        return False
+            passed.append(log)
+
+        return passed
+

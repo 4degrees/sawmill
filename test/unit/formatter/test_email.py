@@ -19,36 +19,32 @@ def test_format():
         level='info'
     )
     template = Email('Test', 'sender@test.com', 'recipient@test.com')
-    data = template.format(log)
-    assert isinstance(data, Message)
-    assert data['Subject'] == 'Test'
-    assert data['From'] == 'sender@test.com'
-    assert data['To'] == 'recipient@test.com'
-    assert data.is_multipart() is True
+    data = template.format([log])
+    assert len(data) == 1
 
-    html = data.get_payload(1)
+    datum = data[0]
+    assert isinstance(datum, Message)
+    assert datum['Subject'] == 'Test'
+    assert datum['From'] == 'sender@test.com'
+    assert datum['To'] == 'recipient@test.com'
+    assert datum.is_multipart() is True
+
+    html = datum.get_payload(1)
     assert html.get_payload() == '''
 <html>
     <body>
-        <h1>Log Message</h1>
-        Logger: test.log<br/>
-        Datetime: 2013-03-06 10:22:52.847663<br/>
-        <p class='info'>
-            A message
-            
-        </p>
+        <h1>Logs</h1>
+        <span class='info'>
+            2013-03-06 10:22:52.847663:test.log:A message
+        </span>
     </body>
 </html>
 '''
 
-    text = data.get_payload(0)
-    assert text.get_payload() == '''# Log Message
+    text = datum.get_payload(0)
+    assert text.get_payload() == '''# Logs
 
-Logger: test.log
-
-Datetime: 2013-03-06 10:22:52.847663
-
-A message
+2013-03-06 10:22:52.847663:test.log:A message
 
 '''
 
@@ -65,15 +61,18 @@ def test_callable(key, value):
         'sender': 'sender@test.com',
         'recipients': 'recipient@test.com'
     }
-    kwargs[key] = lambda log: value
+    kwargs[key] = lambda logs: value
 
     template = Email(**kwargs)
     log = Log()
-    data = template.format(log)
+    data = template.format([log])
+    assert len(data) == 1
+
+    datum = data[0]
     mapping = {
         'subject': 'Subject',
         'sender': 'From',
         'recipients': 'To'
     }
-    assert data[mapping[key]] == value
+    assert datum[mapping[key]] == value
 

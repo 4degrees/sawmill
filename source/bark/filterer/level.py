@@ -25,36 +25,42 @@ class Level(Filterer):
         self.max = max
         self.levels = levels
 
-    def filter(self, log):
-        '''Filter *log* if its level is not between defined range.
+    def filter(self, logs):
+        '''Return *logs* whose level is between the defined range.
 
         .. note::
 
-            If the log has no level information (or a level not present in the
+            If a log has no level information (or a level not present in the
             current levels array) it will pass the filter successfully.
 
         '''
-        level = log.get('level')
+        passed = []
+        for log in logs:
+            level = log.get('level')
 
-        # If level information not present then pass filter.
-        if level is None:
-            return False
+            # If level information not present then pass filter.
+            if level is None:
+                passed.append(log)
+                continue
 
-        # If level value not recognised, play safe and pass filter.
-        try:
-            level_index = self.levels.index(level)
-        except ValueError:
-            return False
+            # If level value not recognised, play safe and pass filter.
+            try:
+                level_index = self.levels.index(level)
+            except ValueError:
+                passed.append(log)
+                continue
 
-        # Check against defined range.
-        if self.min is not None:
-            min_index = self.levels.index(self.min)
-            if level_index < min_index:
-                return True
+            # Check against defined range.
+            if self.min is not None:
+                min_index = self.levels.index(self.min)
+                if level_index < min_index:
+                    continue
 
-        if self.max is not None:
-            max_index = self.levels.index(self.max)
-            if level_index > max_index:
-                return True
+            if self.max is not None:
+                max_index = self.levels.index(self.max)
+                if level_index > max_index:
+                    continue
 
-        return False
+            passed.append(log)
+
+        return passed

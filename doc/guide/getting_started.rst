@@ -24,7 +24,7 @@ fashion and then called the main :py:data:`~bark.root.handle` method with a
 
     :py:func:`bark.configure` is a helper function that attempts to
     configure Bark in a way that is useful to most applications. However,
-    there is no requirement to use this helper or the default configurators 
+    there is no requirement to use this helper or the default configurators
     (see :ref:`bark.guide.configuration`).
 
 Loggers
@@ -95,10 +95,11 @@ because no formatter has been set on our custom handler.
 Formatters
 ----------
 
-A formatter takes a :py:class:`~bark.log.Log` instance and returns some
-formatted data that a handler can output. Typically the returned data will be
-a string, but it is important to note that it does not have to be. The only
-condition is that the returned data works with the handler's output method.
+A formatter takes a list of :py:class:`~bark.log.Log` instances and returns
+a corresponding list of formatted data that a handler can output. Typically the
+returned data will be a string, but it is important to note that it does not
+have to be. The only condition is that the returned data works with the
+handler's output method.
 
 .. note::
 
@@ -126,7 +127,7 @@ Filterers
 
 A filterer controls whether a log should be handled by a particular handler. A
 typical usage of a filterer is to restrict a particular handler to only handle
-serious errors. Add a :py:class:`~bark.filterer.level.Level` filterer to 
+serious errors. Add a :py:class:`~bark.filterer.level.Level` filterer to
 *my_handler* so that it only handles error messages (or greater)::
 
     >>> from bark.filterer.level import Level
@@ -159,7 +160,7 @@ handler::
 You can also quickly combine different filterers for more complex effects::
 
     >>> from bark.filterer.pattern import Pattern
-    >>> bark.root.filterer |= Pattern('my\..*')
+    >>> bark.root.filterer &= Pattern('my\..*', mode=Pattern.EXCLUDE)
 
 The above would filter any log that had too low a level *or* had a name value
 that started with 'my.'.

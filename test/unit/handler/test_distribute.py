@@ -36,7 +36,7 @@ def test_handlers_not_called_due_to_filter():
     '''Test that distribute filter prevents handlers being called.'''
     mock_handler_a = Mock()
     deny_all = Mock()
-    deny_all.filter = Mock(return_value=True)
+    deny_all.filter = Mock(return_value=[])
 
     distribute = Distribute(
         filterer=deny_all,
@@ -48,6 +48,7 @@ def test_handlers_not_called_due_to_filter():
     log = Log()
     distribute.handle(log)
 
-    assert mock_handler_a.handle.called is False
+    mock_handler_a.handle.assert_called_once_with()
+    assert mock_handler_a.output.called is False
 
 

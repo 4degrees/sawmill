@@ -35,16 +35,21 @@ class Email(Handler):
     def output(self, data):
         '''Output formatted *data*.
 
-        *data* should be a prepared :py:class:`~email.message.Message` instance
-        that will be sent using the configured SMTP server. In addition *data*
-        must specify the keys 'To' and 'From' which will be used when sending
-        the email.
+        *data* should be a list of prepared :py:class:`~email.message.Message`
+        instances that will be sent using the configured SMTP server. In
+        addition each message must specify the keys 'To' and 'From' which will
+        be used when sending the email.
 
         '''
         smtp = smtplib.SMTP(self.host, self.port)
         if self.credentials:
             smtp.login(*self.credentials)
 
-        smtp.sendmail(data['From'], data['To'].split(','), data.as_string())
+        for datum in data:
+            smtp.sendmail(
+                datum['From'],
+                datum['To'].split(','),
+                datum.as_string()
+            )
         smtp.quit()
 

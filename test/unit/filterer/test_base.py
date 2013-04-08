@@ -11,17 +11,17 @@ from bark.filterer.base import Filterer, Any, All
 class DenyAll(Filterer):
     '''Filter all logs.'''
 
-    def filter(self, log):
-        '''Return True if *log* should be filtered.'''
-        return True
+    def filter(self, logs):
+        '''Filter all *logs*.'''
+        return []
 
 
 class AllowAll(Filterer):
     '''Don't filter any log.'''
 
-    def filter(self, log):
-        '''Return True if *log* should be filtered.'''
-        return False
+    def filter(self, logs):
+        '''Return all *logs* unfiltered.'''
+        return logs
 
 
 def test_filter():
@@ -29,21 +29,21 @@ def test_filter():
     log = Log()
 
     allow = DenyAll()
-    assert allow.filter(log) is True
+    assert allow.filter([log]) == []
 
     deny = AllowAll()
-    assert deny.filter(log) is False
+    assert deny.filter([log]) == [log]
 
 
 def test_and_combine():
     '''Test combining filterers with and operator.'''
     log = Log()
     filterer = DenyAll() & AllowAll()
-    assert filterer.filter(log) is False
+    assert filterer.filter([log]) == []
 
     filterer = DenyAll()
     filterer &= AllowAll()
-    assert filterer.filter(log) is False
+    assert filterer.filter([log]) == []
 
 
 def test_and_with_non_filterer_errors():
@@ -56,11 +56,11 @@ def test_or_combine():
     '''Test combining filterers with or operator.'''
     log = Log()
     filterer = DenyAll() | AllowAll()
-    assert filterer.filter(log) is True
+    assert filterer.filter([log]) == [log]
 
     filterer = DenyAll()
     filterer |= AllowAll()
-    assert filterer.filter(log) is True
+    assert filterer.filter([log]) == [log]
 
 
 def test_or_with_non_filterer_errors():
@@ -76,20 +76,20 @@ def test_all():
     allow = DenyAll()
     deny = AllowAll()
     filterer = All([allow, deny])
-    assert filterer.filter(log) is False
+    assert filterer.filter([log]) == []
 
     filterer = All([AllowAll(), AllowAll()])
-    assert filterer.filter(log) is False
+    assert filterer.filter([log]) == [log]
 
     filterer = All([DenyAll(), DenyAll()])
-    assert filterer.filter(log) is True
+    assert filterer.filter([log]) == []
 
 
 def test_all_when_no_filterers_Set():
     '''Test All filterer does not filter when no filterers set.'''
     log = Log()
     filterer = All()
-    assert filterer.filter(log) is False
+    assert filterer.filter([log]) == [log]
 
 
 def test_any():
@@ -99,19 +99,19 @@ def test_any():
     allow = DenyAll()
     deny = AllowAll()
     filterer = Any([allow, deny])
-    assert filterer.filter(log) is True
+    assert filterer.filter([log]) == [log]
 
     filterer = Any([AllowAll(), AllowAll()])
-    assert filterer.filter(log) is False
+    assert filterer.filter([log]) == [log]
 
     filterer = Any([DenyAll(), DenyAll()])
-    assert filterer.filter(log) is True
+    assert filterer.filter([log]) == []
 
 
 def test_any_when_no_filterers_Set():
     '''Test Any filterer does not filter when no filterers set.'''
     log = Log()
     filterer = Any()
-    assert filterer.filter(log) is False
+    assert filterer.filter([log]) == [log]
 
 

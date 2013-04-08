@@ -36,20 +36,22 @@ class Handler(object):
     def teardown(self):
         '''Teardown handler.'''
 
-    def handle(self, log):
-        '''Output formatted *log* if passes defined filters.'''
-        if self.filterer is not None and self.filterer.filter(log):
-            return
+    def handle(self, *logs):
+        '''Output formatted *logs* that pass defined filters.'''
+        if self.filterer is not None:
+            logs = self.filterer.filter(logs)
 
-        data = log
+        data = logs
         if self.formatter is not None:
-            data = self.formatter.format(log)
+            data = self.formatter.format(logs)
 
         self.output(data)
 
     @abstractmethod
     def output(self, data):
         '''Output formatted *data*.
+
+        *data* should be a list of entries (typically one per log) to output.
 
         .. warning::
 

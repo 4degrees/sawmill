@@ -6,7 +6,7 @@ from abc import ABCMeta, abstractmethod
 
 
 class Formatter(object):
-    '''Format :py:class:`~bark.log.Log` data for output.
+    '''Format :py:class:`logs<bark.log.Log>` into data for output.
 
     The format of data returned should conform to a contract with supported
     handlers. In this way a formatter is tightly bound to a Handler and is
@@ -17,11 +17,15 @@ class Formatter(object):
     __metaclass__ = ABCMeta
 
     @abstractmethod
-    def format(self, log):
-        '''Return formatted data representing *log*.
+    def format(self, logs):
+        '''Return formatted data representing *logs*.
+
+        The data should be returned as a list, typically one entry per log.
+        Some formatters may choose to combine the passed logs into one
+        formatted datum and should return a list of a single item.
 
         .. warning::
 
-            *log* may be shared and should not be altered.
+            *logs* may be shared and should not be altered.
 
         '''

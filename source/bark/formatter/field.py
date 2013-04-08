@@ -6,7 +6,7 @@ from .base import Formatter
 
 
 class Field(Formatter):
-    '''Format :py:class:`~bark.log.Log` to string according to item list.'''
+    '''Format :py:class:`logs<bark.log.Log>` according to item list.'''
 
     IGNORE, ERROR = ('ignore', 'error')
     REMAINING = '*'
@@ -33,33 +33,37 @@ class Field(Formatter):
         self.template = template
         self.item_separator = item_separator
 
-    def format(self, log):
-        '''Return formatted data representing *log*.'''
+    def format(self, logs):
+        '''Return formatted data representing *logs*.'''
         data = []
+        for log in logs:
+            field_data = []
 
-        # Expand keys.
-        keys = self.keys[:]
-        remaining = sorted(set(log.keys()) - set(keys))
-        expanded = []
-        for key in keys:
-            if key == self.REMAINING:
-                expanded.extend(remaining)
-            else:
-                expanded.append(key)
-
-        # Format string.
-        for key in expanded:
-            if not key in log:
-                if self.mode is self.ERROR:
-                    raise KeyError()
+            # Expand keys.
+            keys = self.keys[:]
+            remaining = sorted(set(log.keys()) - set(keys))
+            expanded = []
+            for key in keys:
+                if key == self.REMAINING:
+                    expanded.extend(remaining)
                 else:
-                    value = ''
-            else:
-                value = log[key]
+                    expanded.append(key)
 
-            entry = self.template.format(key=key, value=value)
-            if entry:
-                data.append(entry)
+            # Format string.
+            for key in expanded:
+                if not key in log:
+                    if self.mode is self.ERROR:
+                        raise KeyError()
+                    else:
+                        value = ''
+                else:
+                    value = log[key]
 
-        return '{0}\n'.format(self.item_separator.join(data))
+                entry = self.template.format(key=key, value=value)
+                if entry:
+                    field_data.append(entry)
+
+            data.append('{0}\n'.format(self.item_separator.join(field_data)))
+
+        return data
 

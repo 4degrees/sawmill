@@ -26,28 +26,31 @@ class Item(Filterer):
         self.value = value
         self.mode = mode
 
-    def filter(self, log):
-        '''Filter *log* based on key, value item matching.
+    def filter(self, logs):
+        '''Filter *logs* based on key, value item matching.
 
-        If the log does not have the key to test against and mode is set to
+        If a log does not have the key to test against and mode is set to
         :py:attr:`~bark.filterer.item.Item.INCLUDE` it will be filtered.
         Conversely, if mode is set to
         :py:attr:`~bark.filterer.item.Item.EXCLUDE` it will not be filtered.
 
         '''
-        # Handle case where key not present to test against.
-        if self.key not in log:
-            if self.mode == self.EXCLUDE:
-                return False
-            else:
-                return True
+        passed = []
+        for log in logs:
+            # Handle case where key not present to test against.
+            if self.key not in log:
+                if self.mode == self.EXCLUDE:
+                    passed.append(log)
+                continue
 
-        value = log[self.key]
+            value = log[self.key]
 
-        if value == self.value and self.mode == self.EXCLUDE:
-            return True
+            if value == self.value and self.mode == self.EXCLUDE:
+                continue
 
-        if value != self.value and self.mode == self.INCLUDE:
-            return True
+            if value != self.value and self.mode == self.INCLUDE:
+                continue
 
-        return False
+            passed.append(log)
+
+        return passed

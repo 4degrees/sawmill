@@ -33,8 +33,9 @@ class Stream(Handler):
     def output(self, data):
         '''Output formatted *data*.
 
-        *data* should be able to be written to a stream object.
+        *data* should be a list of objects able to be written to a stream.
 
         '''
-        self.stream.write(data)
+        for datum in data:
+            self.stream.write(datum)
 

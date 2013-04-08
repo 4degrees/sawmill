@@ -16,67 +16,72 @@ from .mustache import Mustache
 DEFAULT_TEMPLATE = '''
 <html>
     <body>
-        <h1>Log Message</h1>
-        {{#name}}Logger: {{.}}<br/>{{/name}}
-        {{#created}}Datetime: {{.}}<br/>{{/created}}
-        <p class='{{level}}'>
-            {{message}}
-            {{traceback}}
-        </p>
+        <h1>Logs</h1>
+        {{#logs}}
+        <span class='{{level}}'>
+            {{created}}:{{name}}:{{message}}{{#traceback}}<br/>{{.}}{{/traceback}}
+        </span>
+        {{/logs}}
     </body>
 </html>
 '''
 
 
 class Email(Mustache):
-    '''Format :py:class:`~bark.log.Log` to email message instance.'''
+    '''Format :py:class:`logs<bark.log.Log>` to email messages.'''
 
     def __init__(self, subject, sender, recipients, template=DEFAULT_TEMPLATE,
-                 **kw):
+                 batch=True, **kw):
         '''Initialise handler with *subject*, *sender* and *recipients*.
 
         Each of *subject*, *sender* and *recipients* can be either a static
-        string or a callable which will be passed the log record being handled
+        string or a callable which will be passed the log records being handled
         and should return an appropriate value.
 
         *recipients* should be (or return) a string of comma separated email
         addresses.
 
         '''
-        super(Email, self).__init__(template, **kw)
+        super(Email, self).__init__(template, batch=batch, **kw)
         self.subject = subject
         self.sender = sender
         self.recipients = recipients
 
-    def format(self, log):
-        '''Return :py:class:`~email.message.Message` representing *log*.
+    def format(self, logs):
+        '''Return email messages representing *logs*.
 
-        The message will be a multipart message containing both html and plain
-        text versions of the log formatted according to the set template.
+        Each message will be an instance of :py:class:`~email.message.Message`.
+        It will be setup as a multipart message containing both html and plain
+        text versions of the logs formatted according to the set template.
 
         '''
-        html = super(Email, self).format(log)
-        text = html2text(html)
-
         subject = self.subject
         if isinstance(subject, collections.Callable):
-            subject = subject(log)
+            subject = subject(logs)
 
         sender = self.sender
         if isinstance(sender, collections.Callable):
-            sender = sender(log)
+            sender = sender(logs)
 
         recipients = self.recipients
         if isinstance(recipients, collections.Callable):
-            recipients = recipients(log)
+            recipients = recipients(logs)
 
-        message = MIMEMultipart('alternative')
-        message['Subject'] = subject
-        message['From'] = sender
-        message['To'] = recipients
+        data = []
+        entries = super(Email, self).format(logs)
+        for html in entries:
+            text = html2text(html)
 
-        message.attach(MIMEText(text, 'plain'))
-        message.attach(MIMEText(html, 'html'))
+            message = MIMEMultipart('alternative')
+            message['Subject'] = subject
+            message['From'] = sender
+            message['To'] = recipients
 
-        return message
+            message.attach(MIMEText(text, 'plain'))
+            message.attach(MIMEText(html, 'html'))
+
+            data.append(message)
+
+        return data
+
 

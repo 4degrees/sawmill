@@ -19,18 +19,22 @@ class Concrete(Handler):
 
     def output(self, data):
         '''Output formatted *data*.'''
-        self.data.append(data)
+        self.data.extend(data)
 
 
 class Field(Formatter):
-    '''Format log into string of fields.'''
+    '''Format logs into list of field strings.'''
 
-    def format(self, log):
-        '''Return string of log fields.'''
+    def format(self, logs):
+        '''Return each log as a string of log fields.'''
         data = []
-        for key, value in sorted(log.items()):
-            data.append('{0}={1}'.format(key, value))
-        return ':'.join(data)
+        for log in logs:
+            entry = []
+            for key, value in sorted(log.items()):
+                entry.append('{0}={1}'.format(key, value))
+            data.append(':'.join(entry))
+
+        return data
 
 
 def test_handle():
@@ -45,7 +49,7 @@ def test_handle():
 def test_filterer():
     '''Test filterer prevents output of log.'''
     deny_all = Mock()
-    deny_all.filter = Mock(return_value=True)
+    deny_all.filter = Mock(return_value=[])
 
     handler = Concrete(filterer=deny_all)
     log = Log(message='A message')

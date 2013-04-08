@@ -50,3 +50,7 @@ class Log(MutableMapping):
         '''Remove *key* reference.'''
         del self._mapping[key]
 
+    def __hash__(self):
+        '''Return hash of mapping.'''
+        return hash(frozenset(self._mapping.iteritems()))
+

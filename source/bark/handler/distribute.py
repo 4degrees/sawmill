@@ -34,8 +34,8 @@ class Distribute(Handler):
         '''Output formatted *data*.
 
         As *data* is passed directly to other handlers' handle methods, it
-        should be a valid :py:class:`~bark.log.Log` record.
+        should be a list of valid :py:class:`~bark.log.Log` records.
 
         '''
         for handler in self.handlers.values():
-            handler.handle(data)
+            handler.handle(*data)

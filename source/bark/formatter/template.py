@@ -8,7 +8,7 @@ from .base import Formatter
 
 
 class Template(Formatter, string.Formatter):
-    '''Format :py:class:`~bark.log.Log` to string according to a template.'''
+    '''Format :py:class:`logs<bark.log.Log>` according to a template.'''
 
     IGNORE, ERROR = ('ignore', 'error')
 
@@ -20,14 +20,22 @@ class Template(Formatter, string.Formatter):
         value. An alternative is ERROR, which would cause an error to be
         raised.
 
+        .. note::
+
+            The template is applied once per processed log.
+
         '''
         super(Template, self).__init__()
         self.template = template
         self.mode = mode
 
-    def format(self, log):
+    def format(self, logs):
         '''Return formatted data representing *log*.'''
-        return self.vformat(self.template, (), dict(**log))
+        data = []
+        for log in logs:
+            data.append(self.vformat(self.template, (), log))
+
+        return data
 
     def get_field(self, field_name, args, kwargs):
         '''Convert and return *field_name* to an object to be formatted.
