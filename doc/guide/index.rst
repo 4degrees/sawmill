@@ -13,4 +13,5 @@ Overview and examples of using the system in practice.
 
     introduction
     getting_started
-
+    configuration
+    example/index
