@@ -25,7 +25,7 @@ class Mustache(Formatter):
     def format(self, logs):
         '''Return formatted data representing *logs*.
 
-        If self.per_log is True then each log will be passed to the template
+        If self.batch is False then each log will be passed to the template
         separately as the context. Otherwise, all the logs will be passed as
         the context.
 
