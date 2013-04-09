@@ -33,7 +33,7 @@ def configure(*args, **kw):
     file_handler = bark.handler.stream.Stream(file_stream)
 
     file_formatter = bark.formatter.field.Field([
-        'date', 'level', 'name', 'message', '*'
+        'created', 'level', 'name', 'message', '*'
     ])
     file_handler.formatter = file_formatter
 

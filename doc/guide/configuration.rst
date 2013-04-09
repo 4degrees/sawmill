@@ -40,7 +40,7 @@ Before you start make sure you import all the necessary modules:
 
 .. literalinclude:: /resource/configurator.py
     :language: python
-    :lines: 5-12
+    :lines: 5-14
 
 User Visible Or High Level To Standard Error
 --------------------------------------------
@@ -50,40 +50,40 @@ output to :py:attr:`sys.stderr`:
 
 .. literalinclude:: /resource/configurator.py
     :language: python
-    :lines: 18
+    :lines: 20
 
 We want to use a simple :py:class:`~bark.formatter.template.Template` formatter
 to display each log as a string of level and message:
 
 .. literalinclude:: /resource/configurator.py
     :language: python
-    :lines: 19
+    :lines: 21
 
 And attach that as the formatter for the *stderr_handler*:
 
 .. literalinclude:: /resource/configurator.py
     :language: python
-    :lines: 20
+    :lines: 22
 
 Now we need to filter all logs that don't meet the level requirement unless
 they are tagged with a 'user' key:
 
 .. literalinclude:: /resource/configurator.py
     :language: python
-    :lines: 22,23
+    :lines: 24,25
 
 And attach as the filterer for the *stderr_handler*:
 
 .. literalinclude:: /resource/configurator.py
     :language: python
-    :lines: 24
+    :lines: 26
 
 Next we just need to register this handler under a sensible name like
 *stderr*:
 
 .. literalinclude:: /resource/configurator.py
     :language: python
-    :lines: 26
+    :lines: 28
 
 All To File
 -----------
@@ -94,7 +94,7 @@ time:
 
 .. literalinclude:: /resource/configurator.py
     :language: python
-    :lines: 29-31
+    :lines: 31-33
 
 We don't need any filterer as all logs should go to the file, but we do want a
 specific formatter to try and capture as much information as the logs can
@@ -102,7 +102,7 @@ provide:
 
 .. literalinclude:: /resource/configurator.py
     :language: python
-    :lines: 33-36
+    :lines: 35-38
 
 .. note::
 
@@ -113,7 +113,7 @@ And register that one as well:
 
 .. literalinclude:: /resource/configurator.py
     :language: python
-    :lines: 38
+    :lines: 40
 
 Errors To Email
 ---------------
@@ -131,13 +131,13 @@ the email handler and only pass on messages when the set trigger is activated:
 
 .. literalinclude:: /resource/configurator.py
     :language: python
-    :lines: 47-59
+    :lines: 43-61
 
 And register the buffer handler as the email handler:
 
 .. literalinclude:: /resource/configurator.py
     :language: python
-    :lines: 61
+    :lines: 63
 
 .. seealso::
 
