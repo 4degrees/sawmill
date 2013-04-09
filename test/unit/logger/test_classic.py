@@ -2,6 +2,8 @@
 # :copyright: Copyright (c) 2013 Martin Pengelly-Phillips
 # :license: See LICENSE.txt.
 
+from contextlib import nested
+
 import pytest
 import mock
 
@@ -11,20 +13,36 @@ from bark.log import Log
 
 def test_log():
     '''Test log method emits correct message.'''
-    handler = mock.Mock()
-    logger = Classic(
-        'bark.test.classic',
-        note='A note',
-        _handler=handler
-    )
-    logger.log('A message', extra_info_a='Extra A')
-    assert handler.handle.called
-    assert handler.handle.call_args[0][0] == Log(
-        name='bark.test.classic',
-        note='A note',
-        message='A message',
-        extra_info_a='Extra A'
-    )
+    now = 1234456789
+    with nested(
+        mock.patch(
+            'bark.logger.audit.getpass',
+            **{'getuser.return_value': 'thesociable'}
+        ),
+        mock.patch(
+            'bark.logger.audit.time',
+            **{'time.return_value': now}
+        )
+    ):
+        handler = mock.Mock()
+        logger = Classic(
+            'bark.test.classic',
+            note='A note',
+            _handler=handler
+        )
+
+        logger.log('A message', extra_info_a='Extra A')
+        assert handler.handle.called
+
+        log = handler.handle.call_args[0][0]
+        assert log == Log(
+            name='bark.test.classic',
+            note='A note',
+            message='A message',
+            extra_info_a='Extra A',
+            timestamp=now,
+            username='thesociable'
+        )
 
 
 @pytest.mark.parametrize('level', [

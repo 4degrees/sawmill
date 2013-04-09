@@ -4,9 +4,10 @@
 
 from .dynamic import Dynamic
 from .traceback import Traceback
+from .audit import Audit
 
 
-class Classic(Dynamic, Traceback):
+class Classic(Dynamic, Traceback, Audit):
     '''Classic logger compatible with standard Python logger.'''
 
     def __init__(self, name, **kw):
