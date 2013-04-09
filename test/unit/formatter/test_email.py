@@ -13,7 +13,7 @@ from bark.formatter.email import Email
 def test_format():
     '''Test formatted log result is as expected.'''
     log = Log(
-        created='2013-03-06 10:22:52.847663',
+        timestamp=123456789,
         name='test.log',
         message='A message',
         level='info'
@@ -35,7 +35,7 @@ def test_format():
     <body>
         <h1>Logs</h1>
         <span class='info'>
-            2013-03-06 10:22:52.847663:test.log:A message
+            123456789:test.log:A message
         </span>
     </body>
 </html>
@@ -44,7 +44,7 @@ def test_format():
     text = datum.get_payload(0)
     assert text.get_payload() == '''# Logs
 
-2013-03-06 10:22:52.847663:test.log:A message
+123456789:test.log:A message
 
 '''
 

@@ -19,7 +19,7 @@ DEFAULT_TEMPLATE = '''
         <h1>Logs</h1>
         {{#logs}}
         <span class='{{level}}'>
-            {{created}}:{{name}}:{{message}}{{#traceback}}<br/>{{.}}{{/traceback}}
+            {{timestamp}}:{{name}}:{{message}}{{#traceback}}<br/>{{.}}{{/traceback}}
         </span>
         {{/logs}}
     </body>
