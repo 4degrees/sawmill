@@ -23,7 +23,8 @@ def configure(level='info', filepath=None, *args, **kw):
     stderr_handler = Stream(
         sys.stderr,
         filterer=Level(min=level, max=None),
-        formatter=Field(keys=['level', 'name', 'message'], template='{value}')
+        formatter=Field(keys=['level', 'name', 'message', 'traceback'],
+                        template='{value}')
     )
     bark.root.handlers['stderr'] = stderr_handler
 
@@ -35,7 +36,8 @@ def configure(level='info', filepath=None, *args, **kw):
     file_handler = Stream(
         file_descriptor,
         filterer=Level(min=None, max=None),
-        formatter=Field(keys=['level', 'name', 'message'])
+        formatter=Field(keys=['timestamp', 'level', 'name', 'message',
+                              'traceback'])
     )
     bark.root.handlers['file'] = file_handler
 
