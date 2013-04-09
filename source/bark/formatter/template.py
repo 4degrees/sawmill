@@ -10,15 +10,16 @@ from .base import Formatter
 class Template(Formatter, string.Formatter):
     '''Format :py:class:`logs<bark.log.Log>` according to a template.'''
 
-    IGNORE, ERROR = ('ignore', 'error')
+    ERROR = ('__ERROR__')
 
-    def __init__(self, template, mode=IGNORE):
+    def __init__(self, template, missing_key=''):
         '''Initialise formatter with *template*.
 
-        *mode* determines how to handle a missing key when formatting a log.
-        The default IGNORE will substitute an empty string for the missing
-        value. An alternative is ERROR, which would cause an error to be
-        raised.
+        *missing_key* determines how to handle a missing key when formatting a
+        log. If set to :py:attr:`ERROR` then an error will be raised for any
+        key referenced in the template that is missing from the log. Any other
+        value will be used as the substitute for the missing value. The default
+        is an empty string.
 
         .. note::
 
@@ -27,7 +28,7 @@ class Template(Formatter, string.Formatter):
         '''
         super(Template, self).__init__()
         self.template = template
-        self.mode = mode
+        self.missing_key = missing_key
 
     def format(self, logs):
         '''Return formatted data representing *log*.'''
@@ -57,10 +58,10 @@ class Template(Formatter, string.Formatter):
                     obj = obj[index]
 
         except Exception:
-            if self.mode == self.IGNORE:
-                return '', first
-            else:
+            if self.missing_key == self.ERROR:
                 raise
+            else:
+                return self.missing_key, first
 
         return obj, first
 
