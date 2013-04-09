@@ -37,11 +37,11 @@ def test_missing_key_set_to_skip():
     assert template.format([log]) == ['message=A message\n']
 
 
-def test_missing_key_set_to_replace():
-    '''Test missing values replaced when missing_key set to REPLACE.'''
+def test_missing_key_set_to_substitute():
+    '''Test missing values replaced when missing_key set to a substitute.'''
     log = Log(message='A message')
-    template = Field(keys=['level', 'message'], missing_key=Field.REPLACE)
-    assert template.format([log]) == ['level=:message=A message\n']
+    template = Field(keys=['level', 'message'], missing_key='NOT_SET')
+    assert template.format([log]) == ['level=NOT_SET:message=A message\n']
 
 
 def test_missing_key_set_to_error():

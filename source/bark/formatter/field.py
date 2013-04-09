@@ -8,7 +8,7 @@ from .base import Formatter
 class Field(Formatter):
     '''Format :py:class:`logs<bark.log.Log>` according to item list.'''
 
-    SKIP, ERROR, REPLACE = ('skip', 'error', 'replace')
+    SKIP, ERROR = ('__SKIP__', '__ERROR__')
     REMAINING = '*'
 
     def __init__(self, keys, missing_key=SKIP, template='{key}={value}',
@@ -21,8 +21,8 @@ class Field(Formatter):
         *missing_key* determines how to handle a missing key when formatting a
         log. The default :py:attr:`SKIP` will skip the key and not include it
         in the resulting output. :py:attr:`ERROR` will cause a KeyError to be
-        raised while :py:attr:`REPLACE` will replace the missing value with an
-        empty string.
+        raised. Any other value will be used as the substitute string for the
+        missing value.
 
         *template* is used to format the key and value of each field and
         *item_separator* will separate each item.
@@ -53,12 +53,12 @@ class Field(Formatter):
             # Format string.
             for key in expanded:
                 if not key in log:
-                    if self.missing_key is self.ERROR:
+                    if self.missing_key == self.ERROR:
                         raise KeyError(key)
-                    elif self.missing_key is self.REPLACE:
-                        value = ''
-                    else:
+                    elif self.missing_key == self.SKIP:
                         continue
+                    else:
+                        value = self.missing_key
                 else:
                     value = log[key]
 
