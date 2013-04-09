@@ -36,7 +36,7 @@ def test_format():
         <h1>Logs</h1>
         <span class='info'>
             123456789:test.log:A message
-        </span>
+        </span><br/>
     </body>
 </html>
 '''

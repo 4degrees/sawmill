@@ -20,7 +20,7 @@ DEFAULT_TEMPLATE = '''
         {{#logs}}
         <span class='{{level}}'>
             {{timestamp}}:{{name}}:{{message}}{{#traceback}}<br/>{{.}}{{/traceback}}
-        </span>
+        </span><br/>
         {{/logs}}
     </body>
 </html>
