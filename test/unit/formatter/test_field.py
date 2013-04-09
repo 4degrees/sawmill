@@ -30,18 +30,25 @@ def test_alternative_separator():
     assert template.format([log]) == ['level=info, message=A message\n']
 
 
-def test_no_error_with_missing_values():
-    '''Test missing values replaced correctly when mode is IGNORE.'''
+def test_missing_key_set_to_skip():
+    '''Test missing values skipped when missing_key set to SKIP.'''
     log = Log(message='A message')
-    template = Field(keys=['level', 'message'], mode=Field.IGNORE)
+    template = Field(keys=['level', 'message'], missing_key=Field.SKIP)
+    assert template.format([log]) == ['message=A message\n']
+
+
+def test_missing_key_set_to_replace():
+    '''Test missing values replaced when missing_key set to REPLACE.'''
+    log = Log(message='A message')
+    template = Field(keys=['level', 'message'], missing_key=Field.REPLACE)
     assert template.format([log]) == ['level=:message=A message\n']
 
 
-def test_error_with_missing_values():
-    '''Test missing values cause KeyError when mode is ERROR.'''
+def test_missing_key_set_to_error():
+    '''Test missing values raise KeyError when missing_key set to ERROR.'''
     log = Log(message='A message')
 
-    template = Field(keys=['level', 'message'], mode=Field.ERROR)
+    template = Field(keys=['level', 'message'], missing_key=Field.ERROR)
     with pytest.raises(KeyError):
         template.format([log])
 

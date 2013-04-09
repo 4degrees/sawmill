@@ -8,20 +8,21 @@ from .base import Formatter
 class Field(Formatter):
     '''Format :py:class:`logs<bark.log.Log>` according to item list.'''
 
-    IGNORE, ERROR = ('ignore', 'error')
+    SKIP, ERROR, REPLACE = ('skip', 'error', 'replace')
     REMAINING = '*'
 
-    def __init__(self, keys, mode=IGNORE, template='{key}={value}',
+    def __init__(self, keys, missing_key=SKIP, template='{key}={value}',
                  item_separator=':'):
         '''Initialise formatter with *keys* to look for in specific order.
 
         *keys* may contain :py:attr:`REMAINING` at any point to include all
         remaining unspecified keys in alphabetical order.
 
-        *mode* determines how to handle a missing key when formatting a log.
-        The default :py:attr:`IGNORE` will substitute an empty string for the
-        missing value. An alternative is :py:attr:`ERROR`, which would cause an
-        error to be raised.
+        *missing_key* determines how to handle a missing key when formatting a
+        log. The default :py:attr:`SKIP` will skip the key and not include it
+        in the resulting output. :py:attr:`ERROR` will cause a KeyError to be
+        raised while :py:attr:`REPLACE` will replace the missing value with an
+        empty string.
 
         *template* is used to format the key and value of each field and
         *item_separator* will separate each item.
@@ -29,7 +30,7 @@ class Field(Formatter):
         '''
         super(Field, self).__init__()
         self.keys = keys
-        self.mode = mode
+        self.missing_key = missing_key
         self.template = template
         self.item_separator = item_separator
 
@@ -52,10 +53,12 @@ class Field(Formatter):
             # Format string.
             for key in expanded:
                 if not key in log:
-                    if self.mode is self.ERROR:
-                        raise KeyError()
-                    else:
+                    if self.missing_key is self.ERROR:
+                        raise KeyError(key)
+                    elif self.missing_key is self.REPLACE:
                         value = ''
+                    else:
+                        continue
                 else:
                     value = log[key]
 

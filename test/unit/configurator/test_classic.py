@@ -41,8 +41,8 @@ def test_classic_configurator_with_no_options():
         with open(filepath, 'r') as file:
             contents = file.read()
             expected = (
-                'level=:name=:message=Test configurator\n'
-                'level=debug:name=:message=Test configurator\n'
+                'message=Test configurator\n'
+                'level=debug:message=Test configurator\n'
             )
             assert contents == expected
 
