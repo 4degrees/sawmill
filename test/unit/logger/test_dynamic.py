@@ -5,7 +5,7 @@
 import pytest
 import mock
 
-from bark.logger.dynamic import Dynamic
+from mill.logger.dynamic import Dynamic
 
 
 def test_non_dyanmic_item_access():

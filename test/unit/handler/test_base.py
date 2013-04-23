@@ -4,9 +4,9 @@
 
 from mock import Mock
 
-from bark.log import Log
-from bark.handler.base import Handler
-from bark.formatter.base import Formatter
+from mill.log import Log
+from mill.handler.base import Handler
+from mill.formatter.base import Formatter
 
 
 class Concrete(Handler):

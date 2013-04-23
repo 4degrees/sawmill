@@ -5,22 +5,22 @@
 Introduction
 ============
 
-Bark is an alternative to the standard Python logging library
+Mill is an alternative to the standard Python logging library
 
 Its goals are to be simple and consistent in approach as well as making it
 easier to customise behaviour even at a low level. However, it does draw
 several concepts from the standard library so hopefully it will all appear
 vaguely familiar.
 
-Here are some examples of how Bark differs:
+Here are some examples of how Mill differs:
 
 * No explicit hierarchy of loggers. All handlers have the opportunity to
   handle every message by default. However, using the
-  :py:class:`~bark.handler.delegate.Delegate` handler you can construct your
+  :py:class:`~mill.handler.delegate.Delegate` handler you can construct your
   own handler hierarchy if you want.
 
 * Log levels are not treated specially. Instead you can filter based on log
-  level by adding a :py:class:`~bark.filterer.level.Level` filterer to your
+  level by adding a :py:class:`~mill.filterer.level.Level` filterer to your
   handlers.
 
 * There is a clearer contract between formatters and handlers. This simplifies
@@ -29,7 +29,7 @@ Here are some examples of how Bark differs:
 
 * No passing of format arguments to log calls. Format messages using either
   standard Python string formatting or a dedicated
-  :py:class:`~bark.formatter.base.Formatter` that acts on the whole log.
+  :py:class:`~mill.formatter.base.Formatter` that acts on the whole log.
 
 * Filterers and formatters are only defined for handlers so it is clearer
   where to use them (though potentially more restrictive).
@@ -37,7 +37,7 @@ Here are some examples of how Bark differs:
 * The system handles batches of logs by default making it simple to buffer
   logs and generate summary messages.
 
-* Easy to change the root handler (:py:attr:`bark.root`).
+* Easy to change the root handler (:py:attr:`mill.root`).
 
 * Requires Python 2.6 or higher.
 

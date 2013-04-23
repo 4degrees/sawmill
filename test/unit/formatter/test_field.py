@@ -4,8 +4,8 @@
 
 import pytest
 
-from bark.log import Log
-from bark.formatter.field import Field
+from mill.log import Log
+from mill.formatter.field import Field
 
 
 def test_format():

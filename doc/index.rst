@@ -3,7 +3,7 @@
     :license: See LICENSE.txt.
 
 ####
-Bark
+Mill
 ####
 
 An alternative Python logging library.

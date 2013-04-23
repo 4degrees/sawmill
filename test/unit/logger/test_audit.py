@@ -6,7 +6,7 @@ from contextlib import nested
 
 import mock
 
-from bark.logger.audit import Audit
+from mill.logger.audit import Audit
 
 
 def test_adding_audit_information():
@@ -14,11 +14,11 @@ def test_adding_audit_information():
     now = 987654321
     with nested(
         mock.patch(
-            'bark.logger.audit.getpass',
+            'mill.logger.audit.getpass',
             **{'getuser.return_value': 'thesociable'}
         ),
         mock.patch(
-            'bark.logger.audit.time',
+            'mill.logger.audit.time',
             **{'time.return_value': now}
         )
     ):

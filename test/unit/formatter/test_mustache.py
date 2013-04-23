@@ -4,8 +4,8 @@
 
 import pystache
 
-from bark.log import Log
-from bark.formatter.mustache import Mustache
+from mill.log import Log
+from mill.formatter.mustache import Mustache
 
 
 def test_format():

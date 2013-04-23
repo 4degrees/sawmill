@@ -4,8 +4,8 @@
 
 from mock import Mock
 
-from bark.log import Log
-from bark.handler.buffer import Buffer
+from mill.log import Log
+from mill.handler.buffer import Buffer
 
 
 def test_handler_called_on_trigger():

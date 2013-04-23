@@ -11,5 +11,5 @@ API reference providing details on the actual code.
 .. toctree::
     :maxdepth: 1
 
-    bark/index
+    mill/index
 

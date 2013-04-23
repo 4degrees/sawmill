@@ -4,8 +4,8 @@
 
 import pytest
 
-from bark.log import Log
-from bark.filterer.level import Level
+from mill.log import Log
+from mill.filterer.level import Level
 
 
 def pytest_funcarg__levels(request):

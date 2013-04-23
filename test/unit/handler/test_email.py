@@ -4,14 +4,14 @@
 
 import mock
 
-from bark.log import Log
-from bark.formatter.email import Email as EmailFormatter
-from bark.handler.email import Email
+from mill.log import Log
+from mill.formatter.email import Email as EmailFormatter
+from mill.handler.email import Email
 
 
 def test_output():
     '''Test outputting to email.'''
-    with mock.patch('bark.handler.email.smtplib.SMTP', spec=True) as SMTP:
+    with mock.patch('mill.handler.email.smtplib.SMTP', spec=True) as SMTP:
         host = 'emailhost'
         port = 90210
         handler = Email(
@@ -34,7 +34,7 @@ def test_output():
 
 def test_login_when_credentials_present():
     '''Test login is called when credentials available.'''
-    with mock.patch('bark.handler.email.smtplib.SMTP', spec=True) as SMTP:
+    with mock.patch('mill.handler.email.smtplib.SMTP', spec=True) as SMTP:
         handler = Email(
             credentials=('me@test.com', 'mypassword'),
             formatter=EmailFormatter(
@@ -52,7 +52,7 @@ def test_login_when_credentials_present():
 
 def test_no_login_when_credentials_not_present():
     '''Test login is not called when credentials not available.'''
-    with mock.patch('bark.handler.email.smtplib.SMTP', spec=True) as SMTP:
+    with mock.patch('mill.handler.email.smtplib.SMTP', spec=True) as SMTP:
         handler = Email(
             formatter=EmailFormatter(
                 'Test',

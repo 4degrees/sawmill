@@ -4,46 +4,46 @@
 
 import sys
 
-import bark
-import bark.handler.stream
-import bark.handler.email
-import bark.handler.buffer
-import bark.formatter.template
-import bark.formatter.field
-import bark.filterer.level
-import bark.filterer.item
+import mill
+import mill.handler.stream
+import mill.handler.email
+import mill.handler.buffer
+import mill.formatter.template
+import mill.formatter.field
+import mill.filterer.level
+import mill.filterer.item
 
 
 def configure(*args, **kw):
     '''Example of how to configure logging system.'''
     # Output to standard error stream.
-    stderr_handler = bark.handler.stream.Stream(sys.stderr)
-    stderr_formatter = bark.formatter.template.Template('{level}:{message}')
+    stderr_handler = mill.handler.stream.Stream(sys.stderr)
+    stderr_formatter = mill.formatter.template.Template('{level}:{message}')
     stderr_handler.formatter = stderr_formatter
 
-    stderr_filterer = bark.filterer.level.Level(min='warning', max=None)
-    stderr_filterer |= bark.filterer.item.Item('user', True)
+    stderr_filterer = mill.filterer.level.Level(min='warning', max=None)
+    stderr_filterer |= mill.filterer.item.Item('user', True)
     stderr_handler.filterer = stderr_filterer
 
-    bark.root.handlers['stderr'] = stderr_handler
+    mill.root.handlers['stderr'] = stderr_handler
 
     # Output to log file
     log_path = '/path/to/logfile.log'
     file_stream = open(log_path, 'a')
-    file_handler = bark.handler.stream.Stream(file_stream)
+    file_handler = mill.handler.stream.Stream(file_stream)
 
-    file_formatter = bark.formatter.field.Field([
+    file_formatter = mill.formatter.field.Field([
         'timestamp', 'level', 'name', 'message', '*'
     ])
     file_handler.formatter = file_formatter
 
-    bark.root.handlers['file'] = file_handler
+    mill.root.handlers['file'] = file_handler
 
     # Send email on errors.
-    email_handler = bark.handler.email.Email(
+    email_handler = mill.handler.email.Email(
         'Error Report',
-        'no-reply@bark.net',
-        'support@bark.net'
+        'no-reply@mill.net',
+        'support@mill.net'
     )
 
     def check_for_error(logs, buffer):
@@ -54,11 +54,11 @@ def configure(*args, **kw):
 
         return False
 
-    email_buffer_handler = bark.handler.buffer.Buffer(
+    email_buffer_handler = mill.handler.buffer.Buffer(
         email_handler,
         check_for_error,
         limit=30
     )
 
-    bark.root.handlers['email'] = email_buffer_handler
+    mill.root.handlers['email'] = email_buffer_handler
 

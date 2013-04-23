@@ -4,8 +4,8 @@
 
 from mock import Mock
 
-from bark.log import Log
-from bark.handler.distribute import Distribute
+from mill.log import Log
+from mill.handler.distribute import Distribute
 
 
 def test_handlers_called():

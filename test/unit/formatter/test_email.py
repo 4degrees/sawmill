@@ -6,8 +6,8 @@ from email.message import Message
 
 import pytest
 
-from bark.log import Log
-from bark.formatter.email import Email
+from mill.log import Log
+from mill.formatter.email import Email
 
 
 def test_format():

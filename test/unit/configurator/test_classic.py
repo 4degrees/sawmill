@@ -7,37 +7,37 @@ from StringIO import StringIO
 
 import mock
 
-import bark
-import bark.log
-from bark.configurator import classic
+import mill
+import mill.log
+from mill.configurator import classic
 
 
 def test_classic_configurator_with_no_options():
     '''Test classic configurator when passed no options.'''
     with nested(
         mock.patch('sys.stderr', new_callable=StringIO),
-        mock.patch.dict(bark.root.handlers, clear=True)
+        mock.patch.dict(mill.root.handlers, clear=True)
     ) as (stderr, handlers):
-        assert len(bark.root.handlers) == 0
+        assert len(mill.root.handlers) == 0
 
         # Check handlers added under expected keys
         classic.configure()
-        assert sorted(bark.root.handlers.keys()) == ['file', 'stderr']
+        assert sorted(mill.root.handlers.keys()) == ['file', 'stderr']
 
         # Check stderr handler
         assert stderr.getvalue() == ''
-        log = bark.log.Log(message='Test configurator')
-        bark.root.handle(log)
+        log = mill.log.Log(message='Test configurator')
+        mill.root.handle(log)
         assert stderr.getvalue() == 'Test configurator\n'
         stderr.truncate(0)
 
-        log = bark.log.Log(message='Test configurator', level='debug')
-        bark.root.handle(log)
+        log = mill.log.Log(message='Test configurator', level='debug')
+        mill.root.handle(log)
         assert stderr.getvalue() == ''
 
         # Check file handler
-        bark.root.handlers['file'].flush()
-        filepath = bark.root.handlers['file'].stream.name
+        mill.root.handlers['file'].flush()
+        filepath = mill.root.handlers['file'].stream.name
         with open(filepath, 'r') as file:
             contents = file.read()
             expected = (

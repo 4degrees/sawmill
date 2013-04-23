@@ -7,8 +7,8 @@ from contextlib import nested
 import pytest
 import mock
 
-from bark.logger.classic import Classic
-from bark.log import Log
+from mill.logger.classic import Classic
+from mill.log import Log
 
 
 def test_log():
@@ -16,17 +16,17 @@ def test_log():
     now = 1234456789
     with nested(
         mock.patch(
-            'bark.logger.audit.getpass',
+            'mill.logger.audit.getpass',
             **{'getuser.return_value': 'thesociable'}
         ),
         mock.patch(
-            'bark.logger.audit.time',
+            'mill.logger.audit.time',
             **{'time.return_value': now}
         )
     ):
         handler = mock.Mock()
         logger = Classic(
-            'bark.test.classic',
+            'mill.test.classic',
             note='A note',
             _handler=handler
         )
@@ -36,7 +36,7 @@ def test_log():
 
         log = handler.handle.call_args[0][0]
         assert log == Log(
-            name='bark.test.classic',
+            name='mill.test.classic',
             note='A note',
             message='A message',
             extra_info_a='Extra A',
@@ -53,7 +53,7 @@ def test_log():
 ])
 def test_level_helper(level):
     '''Test level helper correctly sets level key.'''
-    logger = Classic('bark.test.classic')
+    logger = Classic('mill.test.classic')
     logger.log = mock.Mock()
 
     message = 'A {0} level message.'.format(level)

@@ -4,25 +4,25 @@
 
 import mock
 
-from bark.logger.base import Logger
-from bark.log import Log
+from mill.logger.base import Logger
+from mill.log import Log
 
 
 def test_log():
     '''Test log method emits correct message.'''
     handler = mock.Mock()
-    logger = Logger(name='bark.test.logger', _handler=handler)
+    logger = Logger(name='mill.test.logger', _handler=handler)
     logger.log(message='A message')
     assert handler.handle.called
     assert handler.handle.call_args[0][0] == Log(
-        name='bark.test.logger',
+        name='mill.test.logger',
         message='A message',
     )
 
 
 def test_prepare_returns_distinct_copy():
     '''Test prepare returns a distinct copy of the logger.'''
-    logger = Logger(name='bark.test.logger')
+    logger = Logger(name='mill.test.logger')
     log = logger.prepare()
     assert log is not logger
 
@@ -30,10 +30,10 @@ def test_prepare_returns_distinct_copy():
 def test_repeat_call_side_effects():
     '''Test repeat calls with different arguments have no side-effects.'''
     handler = mock.Mock()
-    logger = Logger(name='bark.test.logger', _handler=handler)
+    logger = Logger(name='mill.test.logger', _handler=handler)
     logger.log(message_a='Message A')
     assert handler.handle.call_args[0][0] == Log(
-        name='bark.test.logger',
+        name='mill.test.logger',
         message_a='Message A',
     )
 
@@ -41,7 +41,7 @@ def test_repeat_call_side_effects():
     # data.
     logger.log(message_b='Message B')
     assert handler.handle.call_args[0][0] == Log(
-        name='bark.test.logger',
+        name='mill.test.logger',
         message_b='Message B',
     )
 

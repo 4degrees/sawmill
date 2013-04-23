@@ -1,5 +1,5 @@
 ####
-Bark
+Mill
 ####
 
 Alternative logging framework for Python.
@@ -8,7 +8,7 @@ Alternative logging framework for Python.
 Bug tracker
 ***********
 
-Found a bug? Report it at https://github.com/thesociable/bark/issues
+Found a bug? Report it at https://github.com/thesociable/mill/issues
 
 *********************
 Copyright and license

@@ -2,29 +2,29 @@
     :copyright: Copyright (c) 2013 Martin Pengelly-Phillips
     :license: See LICENSE.txt.
 
-.. _bark.guide.configuration:
+.. _mill.guide.configuration:
 
 Configuration
 =============
 
-Bark comes with some default *configurators* that are simple helper functions
+Mill comes with some default *configurators* that are simple helper functions
 for configuring the system. Each one is registered in the
-:py:data:`bark.configurators` dictionary and can be called through the
-:py:func:`bark.configure` function.
+:py:data:`mill.configurators` dictionary and can be called through the
+:py:func:`mill.configure` function.
 
-The default configurator is the :py:mod:`~bark.configurator.classic` one which
-you would have used in the :ref:`bark.guide.getting_started` guide.
+The default configurator is the :py:mod:`~mill.configurator.classic` one which
+you would have used in the :ref:`mill.guide.getting_started` guide.
 
 .. note::
 
-    You can find reference for each configurator that comes with Bark in the
-    :mod:`bark.configurator` section.
+    You can find reference for each configurator that comes with Mill in the
+    :mod:`mill.configurator` section.
 
 You don't have to use a configurator though (or you might want to create your
 own) so let's take a look at manually configuring the system.
 
 First, decide what you want to handle, where it should go and how it should be
-formatted. For our purposes, we will configure Bark to:
+formatted. For our purposes, we will configure Mill to:
 
 * Send all logs to :py:attr:`sys.stderr` that have a level greater than
   'warning' or have been tagged with a 'user' key. The format will be just
@@ -45,14 +45,14 @@ Before you start make sure you import all the necessary modules:
 User Visible Or High Level To Standard Error
 --------------------------------------------
 
-First up we need a :py:class:`~bark.handler.stream.Stream` handler to direct
+First up we need a :py:class:`~mill.handler.stream.Stream` handler to direct
 output to :py:attr:`sys.stderr`:
 
 .. literalinclude:: /resource/configurator.py
     :language: python
     :lines: 20
 
-We want to use a simple :py:class:`~bark.formatter.template.Template` formatter
+We want to use a simple :py:class:`~mill.formatter.template.Template` formatter
 to display each log as a string of level and message:
 
 .. literalinclude:: /resource/configurator.py
@@ -89,7 +89,7 @@ All To File
 -----------
 
 Logging everything to a file means we need another
-:py:class:`~bark.handler.stream.Stream` handler, but pointing at a file this
+:py:class:`~mill.handler.stream.Stream` handler, but pointing at a file this
 time:
 
 .. literalinclude:: /resource/configurator.py
@@ -141,5 +141,5 @@ And register the buffer handler as the email handler:
 
 .. seealso::
 
-    See :ref:`Configurator Example <bark.guide.example.configurator>` for the
+    See :ref:`Configurator Example <mill.guide.example.configurator>` for the
     full code used in this tutorial.

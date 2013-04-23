@@ -2,39 +2,39 @@
     :copyright: Copyright (c) 2013 Martin Pengelly-Phillips
     :license: See LICENSE.txt.
 
-.. _bark.guide.getting_started:
+.. _mill.guide.getting_started:
 
 Getting Started
 ===============
 
-Using Bark is straightforward::
+Using Mill is straightforward::
 
-    >>> import bark
-    >>> from bark.log import Log
-    >>> bark.configure()
-    >>> bark.root.handle(Log(message='Hello World!'))
+    >>> import mill
+    >>> from mill.log import Log
+    >>> mill.configure()
+    >>> mill.root.handle(Log(message='Hello World!'))
     Hello World!
 
-Voila! You asked Bark to :py:func:`~bark.configure` itself in a classic
-fashion and then called the main :py:data:`~bark.root.handle` method with a
-:py:class:`~bark.log.Log` instance. The resulting message appeared on
+Voila! You asked Mill to :py:func:`~mill.configure` itself in a classic
+fashion and then called the main :py:data:`~mill.root.handle` method with a
+:py:class:`~mill.log.Log` instance. The resulting message appeared on
 :py:attr:`sys.stderr`.
 
 .. note::
 
-    :py:func:`bark.configure` is a helper function that attempts to
-    configure Bark in a way that is useful to most applications. However,
+    :py:func:`mill.configure` is a helper function that attempts to
+    configure Mill in a way that is useful to most applications. However,
     there is no requirement to use this helper or the default configurators
-    (see :ref:`bark.guide.configuration`).
+    (see :ref:`mill.guide.configuration`).
 
 Loggers
 -------
 
 If you find that you are regularly inputting the same information for each
-log instance then you can create a :py:meth:`~bark.logger.base.Logger` to
+log instance then you can create a :py:meth:`~mill.logger.base.Logger` to
 hold common information. Any values you set on the logger will automatically
 propagate into the log messages you generate using the
-:py:meth:`~bark.logger.base.Logger.log` method::
+:py:meth:`~mill.logger.base.Logger.log` method::
 
     >>> logger = Logger(name='my.logger')
     >>> logger.log(message='Hi there')
@@ -43,12 +43,12 @@ propagate into the log messages you generate using the
     >>> logger.log(message='Some information')
     my.logger:info:Hi there
 
-Bark comes with some different logger implementations to handle common
+Mill comes with some different logger implementations to handle common
 scenarios, but you can also define your own. Here is the
-:py:class:`~bark.logger.classic.Classic` logger in action that mimics the
+:py:class:`~mill.logger.classic.Classic` logger in action that mimics the
 standard Python logger behaviour::
 
-    >>> from bark.logger.classic import Classic as Logger
+    >>> from mill.logger.classic import Classic as Logger
     >>> logger = Logger('my.logger')
     >>> logger.info('An informational message')
     my.logger:info:An informational message
@@ -59,10 +59,10 @@ Handlers
 --------
 
 So, how are those messages ending up on :py:attr:`sys.stderr`? This is because
-the configure function adds a :py:class:`~bark.handler.stream.Stream` handler
+the configure function adds a :py:class:`~mill.handler.stream.Stream` handler
 configured to output all messages to standard error. It does this by
-registering the handler with the :py:data:`~bark.root` handler which, by
-default, is a :py:class:`~bark.handler.distribute.Distribute` handler. The
+registering the handler with the :py:data:`~mill.root` handler which, by
+default, is a :py:class:`~mill.handler.distribute.Distribute` handler. The
 distribute handler simply relays all the logs it receives to other handlers
 registered with it.
 
@@ -70,14 +70,14 @@ Let's add another stream handler to the root handler, but this time outputting
 to a :py:class:`~StringIO.StringIO` instance::
 
     >>> from StringIO import StringIO
-    >>> from bark.handler.stream import Stream
+    >>> from mill.handler.stream import Stream
     >>> my_stream = StringIO()
     >>> my_handler = Stream(stream=my_stream)
 
 All that you have to do to register a handler with a distribute handler is
 set it with a unique key on the handlers dictionary of the distribute handler::
 
-    >>> bark.root.handlers['my_handler'] = my_handler
+    >>> mill.root.handlers['my_handler'] = my_handler
 
 Now we can log as normal using our logger from before::
 
@@ -95,7 +95,7 @@ because no formatter has been set on our custom handler.
 Formatters
 ----------
 
-A formatter takes a list of :py:class:`~bark.log.Log` instances and returns
+A formatter takes a list of :py:class:`~mill.log.Log` instances and returns
 a corresponding list of formatted data that a handler can output. Typically the
 returned data will be a string, but it is important to note that it does not
 have to be. The only condition is that the returned data works with the
@@ -107,10 +107,10 @@ handler's output method.
     every formatter with every handler. Instead check the documentation for
     which ones work well together.
 
-Add a :py:class:`~bark.formatter.template.Template` formatter to the handler
+Add a :py:class:`~mill.formatter.template.Template` formatter to the handler
 created above::
 
-    >>> from bark.formatter.template import Template
+    >>> from mill.formatter.template import Template
     >>> my_formatter = Template('{level}:{message}\n')
     >>> my_handler.formatter = my_formatter
 
@@ -127,16 +127,16 @@ Filterers
 
 A filterer controls whether a log should be handled by a particular handler. A
 typical usage of a filterer is to restrict a particular handler to only handle
-serious errors. Add a :py:class:`~bark.filterer.level.Level` filterer to
+serious errors. Add a :py:class:`~mill.filterer.level.Level` filterer to
 *my_handler* so that it only handles error messages (or greater)::
 
-    >>> from bark.filterer.level import Level
+    >>> from mill.filterer.level import Level
     >>> my_handler.filterer = Level(min='error', max=None)
 
 .. note::
 
     The level values available and their respective order is set, by default,
-    according to the :py:data:`bark.levels` array.
+    according to the :py:data:`mill.levels` array.
 
 Now try logging an info level message::
 
@@ -154,13 +154,13 @@ up under a distribute handler and then set the filterer on that handler. For
 example, here is how to limit all the handlers using a filterer on the root
 handler::
 
-    >>> bark.root.filterer = Level(min='error', max=None)
+    >>> mill.root.filterer = Level(min='error', max=None)
     >>> logger.info('I will not appear anywhere.')
 
 You can also quickly combine different filterers for more complex effects::
 
-    >>> from bark.filterer.pattern import Pattern
-    >>> bark.root.filterer &= Pattern('my\..*', mode=Pattern.EXCLUDE)
+    >>> from mill.filterer.pattern import Pattern
+    >>> mill.root.filterer &= Pattern('my\..*', mode=Pattern.EXCLUDE)
 
 The above would filter any log that had too low a level *or* had a name value
 that started with 'my.'.

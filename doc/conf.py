@@ -2,7 +2,7 @@
 # :copyright: Copyright (c) 2013 Martin Pengelly-Phillips
 # :license: See LICENSE.txt.
 
-'''Bark documentation build configuration file'''
+'''Mill documentation build configuration file'''
 
 # -- General ------------------------------------------------------------------
 
@@ -21,7 +21,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Bark'
+project = u'Mill'
 copyright = u'2013, Martin Pengelly-Phillips'
 
 # Version
@@ -36,7 +36,7 @@ exclude_patterns = ['static', 'template']
 pygments_style = 'sphinx'
 
 # A list of prefixes to ignore for module listings
-modindex_common_prefix = ['bark.']
+modindex_common_prefix = ['mill.']
 
 
 # -- HTML output --------------------------------------------------------------

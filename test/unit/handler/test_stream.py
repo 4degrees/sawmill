@@ -10,8 +10,8 @@ except ImportError:
 
 from mock import Mock
 
-from bark.log import Log
-from bark.handler.stream import Stream
+from mill.log import Log
+from mill.handler.stream import Stream
 
 
 def test_output():

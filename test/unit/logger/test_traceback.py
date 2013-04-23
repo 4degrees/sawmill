@@ -4,7 +4,7 @@
 
 import mock
 
-from bark.logger.traceback import Traceback
+from mill.logger.traceback import Traceback
 
 
 def test_extracting_traceback():

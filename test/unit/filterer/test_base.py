@@ -4,8 +4,8 @@
 
 import pytest
 
-from bark.log import Log
-from bark.filterer.base import Filterer, Any, All
+from mill.log import Log
+from mill.filterer.base import Filterer, Any, All
 
 
 class DenyAll(Filterer):
