@@ -7,8 +7,7 @@
 Examples
 ========
 
-Here you will find various examples for using the system, including
-custom configurations.
+Here you will find various examples for using the system:
 
 .. toctree::
     :glob:

@@ -2,7 +2,7 @@
     :copyright: Copyright (c) 2013 Martin Pengelly-Phillips
     :license: See LICENSE.txt.
 
-.. _mill.guide.configuration:
+.. _bark.guide.configuration:
 
 Configuration
 =============
@@ -38,9 +38,9 @@ formatted. For our purposes, we will configure Mill to:
 
 Before you start make sure you import all the necessary modules:
 
-.. literalinclude:: /resource/configurator.py
+.. literalinclude:: /../source/mill/configurator/alpha.py
     :language: python
-    :lines: 5-14
+    :lines: 5-16
 
 User Visible Or High Level To Standard Error
 --------------------------------------------
@@ -48,42 +48,42 @@ User Visible Or High Level To Standard Error
 First up we need a :py:class:`~mill.handler.stream.Stream` handler to direct
 output to :py:attr:`sys.stderr`:
 
-.. literalinclude:: /resource/configurator.py
+.. literalinclude:: /../source/mill/configurator/alpha.py
     :language: python
-    :lines: 20
+    :lines: 29
 
 We want to use a simple :py:class:`~mill.formatter.template.Template` formatter
 to display each log as a string of level and message:
 
-.. literalinclude:: /resource/configurator.py
+.. literalinclude:: /../source/mill/configurator/alpha.py
     :language: python
-    :lines: 21
+    :lines: 30
 
 And attach that as the formatter for the *stderr_handler*:
 
-.. literalinclude:: /resource/configurator.py
+.. literalinclude:: /../source/mill/configurator/alpha.py
     :language: python
-    :lines: 22
+    :lines: 31
 
 Now we need to filter all logs that don't meet the level requirement unless
 they are tagged with a 'user' key:
 
-.. literalinclude:: /resource/configurator.py
+.. literalinclude:: /../source/mill/configurator/alpha.py
     :language: python
-    :lines: 24,25
+    :lines: 33,34
 
 And attach as the filterer for the *stderr_handler*:
 
-.. literalinclude:: /resource/configurator.py
+.. literalinclude:: /../source/mill/configurator/alpha.py
     :language: python
-    :lines: 26
+    :lines: 35
 
 Next we just need to register this handler under a sensible name like
 *stderr*:
 
-.. literalinclude:: /resource/configurator.py
+.. literalinclude:: /../source/mill/configurator/alpha.py
     :language: python
-    :lines: 28
+    :lines: 37
 
 All To File
 -----------
@@ -92,17 +92,17 @@ Logging everything to a file means we need another
 :py:class:`~mill.handler.stream.Stream` handler, but pointing at a file this
 time:
 
-.. literalinclude:: /resource/configurator.py
+.. literalinclude:: /../source/mill/configurator/alpha.py
     :language: python
-    :lines: 31-33
+    :lines: 40-45
 
 We don't need any filterer as all logs should go to the file, but we do want a
 specific formatter to try and capture as much information as the logs can
 provide:
 
-.. literalinclude:: /resource/configurator.py
+.. literalinclude:: /../source/mill/configurator/alpha.py
     :language: python
-    :lines: 35-38
+    :lines: 47-50
 
 .. note::
 
@@ -111,9 +111,9 @@ provide:
 
 And register that one as well:
 
-.. literalinclude:: /resource/configurator.py
+.. literalinclude:: /../source/mill/configurator/alpha.py
     :language: python
-    :lines: 40
+    :lines: 52
 
 Errors To Email
 ---------------
@@ -122,24 +122,24 @@ Finally create an email handler that will send any errors to a predefined
 email address, including a buffer of recent messages. First setup the email
 handler with the default template:
 
-.. literalinclude:: /resource/configurator.py
+.. literalinclude:: /../source/mill/configurator/alpha.py
     :language: python
-    :lines: 41-45
+    :lines: 55-63
 
 Next, we need a buffer so that errors will have context. This buffer will wrap
 the email handler and only pass on messages when the set trigger is activated:
 
-.. literalinclude:: /resource/configurator.py
+.. literalinclude:: /../source/mill/configurator/alpha.py
     :language: python
-    :lines: 43-61
+    :lines: 65-77
 
 And register the buffer handler as the email handler:
 
-.. literalinclude:: /resource/configurator.py
+.. literalinclude:: /../source/mill/configurator/alpha.py
     :language: python
-    :lines: 63
+    :lines: 79
 
 .. seealso::
 
-    See :ref:`Configurator Example <mill.guide.example.configurator>` for the
-    full code used in this tutorial.
+    The :py:mod:`~mill.configurator.alpha` configurator used for this example.
+
