@@ -2,7 +2,9 @@
 Mill
 ####
 
-Alternative logging framework for Python::
+Alternative logging framework for Python:
+
+.. code-block:: python
 
     >>> import mill
     >>> from mill.logger.classic import Classic as Logger
