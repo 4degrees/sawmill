@@ -2,13 +2,24 @@
 Mill
 ####
 
-Alternative logging framework for Python.
+Alternative logging framework for Python::
 
-***********
-Bug tracker
-***********
+    >>> import mill
+    >>> from mill.logger.classic import Classic as Logger
+    >>> mill.configure()
+    >>> logger = Logger('my.mill')
+    >>> logger.info('Hello World!')
+    my.mill:info:Hello World!
 
-Found a bug? Report it at https://github.com/thesociable/mill/issues
+Find out more by reading the documentation at http://mill.readthedocs.org
+
+*************
+Issue tracker
+*************
+
+Found a bug? Have an idea on how to make the framework better?
+
+Post it at https://github.com/thesociable/mill/issues
 
 *********************
 Copyright and license
