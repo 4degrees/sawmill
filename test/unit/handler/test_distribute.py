@@ -4,8 +4,8 @@
 
 from mock import Mock
 
-from mill.log import Log
-from mill.handler.distribute import Distribute
+from sawmill.log import Log
+from sawmill.handler.distribute import Distribute
 
 
 def test_handlers_called():

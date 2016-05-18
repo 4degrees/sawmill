@@ -12,7 +12,7 @@ RESOURCE_PATH = os.path.join(ROOT_PATH, 'resource')
 SOURCE_PATH = os.path.join(ROOT_PATH, 'source')
 README_PATH = os.path.join(ROOT_PATH, 'README.rst')
 
-PACKAGE_NAME = 'mill'
+PACKAGE_NAME = 'sawmill'
 
 # Read version from source.
 with open(
@@ -52,7 +52,7 @@ setup(
     description='Alternative logging framework for Python',
     long_description=open(README_PATH).read(),
     keywords='logging',
-    url='http://github.com/thesociable/mill',
+    url='http://github.com/thesociable/sawmill',
     author='Martin Pengelly-Phillips',
     author_email='martin@4degrees.ltd.uk',
     license='Apache License (2.0)',

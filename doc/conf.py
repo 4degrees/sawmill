@@ -2,7 +2,7 @@
 # :copyright: Copyright (c) 2013 Martin Pengelly-Phillips
 # :license: See LICENSE.txt.
 
-'''Mill documentation build configuration file'''
+'''Sawmill documentation build configuration file'''
 
 import os
 import re
@@ -32,13 +32,13 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Mill'
+project = u'Sawmill'
 copyright = u'2013, Martin Pengelly-Phillips'
 
 # Version
 with open(
     os.path.join(
-        os.path.dirname(__file__), '..', 'source', 'mill', '_version.py'
+        os.path.dirname(__file__), '..', 'source', 'sawmill', '_version.py'
     )
 ) as _version_file:
     _version = re.match(
@@ -53,7 +53,7 @@ release = _version
 exclude_patterns = ['_template']
 
 # A list of prefixes to ignore for module listings
-modindex_common_prefix = ['mill.']
+modindex_common_prefix = ['sawmill.']
 
 
 # -- HTML output --------------------------------------------------------------

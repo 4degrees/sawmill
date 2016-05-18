@@ -6,8 +6,8 @@ from email.message import Message
 
 import pytest
 
-from mill.log import Log
-from mill.formatter.email import Email
+from sawmill.log import Log
+from sawmill.formatter.email import Email
 
 
 def test_format():

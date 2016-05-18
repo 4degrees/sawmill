@@ -4,8 +4,8 @@
 
 import pytest
 
-from mill.log import Log
-from mill.filterer.base import Filterer, Any, All
+from sawmill.log import Log
+from sawmill.filterer.base import Filterer, Any, All
 
 
 class DenyAll(Filterer):

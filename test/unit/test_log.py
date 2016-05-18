@@ -4,24 +4,24 @@
 
 import pytest
 
-from mill.log import Log
+from sawmill.log import Log
 
 
 def test_create():
     '''Test creating a Log instance.'''
-    log = Log(name='mill.test.log')
-    assert log.items() == [('name', 'mill.test.log')]
+    log = Log(name='sawmill.test.log')
+    assert log.items() == [('name', 'sawmill.test.log')]
 
 
 def test_string_representation():
     '''Test string representation of Log instance.'''
-    log = Log(name='mill.test.log')
-    assert str(log) == "{'name': 'mill.test.log'}"
+    log = Log(name='sawmill.test.log')
+    assert str(log) == "{'name': 'sawmill.test.log'}"
 
 
 def test_length():
     '''Test len method returns number of current keys.'''
-    log = Log(name='mill.test.log')
+    log = Log(name='sawmill.test.log')
     assert len(log) == 1
     log['message'] = 'A message'
     assert len(log) == 2

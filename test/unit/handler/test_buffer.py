@@ -4,8 +4,8 @@
 
 from mock import Mock
 
-from mill.log import Log
-from mill.handler.buffer import Buffer
+from sawmill.log import Log
+from sawmill.handler.buffer import Buffer
 
 
 def test_handler_called_on_trigger():

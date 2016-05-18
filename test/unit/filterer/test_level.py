@@ -4,8 +4,8 @@
 
 import pytest
 
-from mill.log import Log
-from mill.filterer.level import Level
+from sawmill.log import Log
+from sawmill.filterer.level import Level
 
 
 def pytest_funcarg__levels(request):

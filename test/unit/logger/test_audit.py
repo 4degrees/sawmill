@@ -6,7 +6,7 @@ from contextlib import nested
 
 import mock
 
-from mill.logger.audit import Audit
+from sawmill.logger.audit import Audit
 
 
 def test_adding_audit_information():
@@ -14,11 +14,11 @@ def test_adding_audit_information():
     now = 987654321
     with nested(
         mock.patch(
-            'mill.logger.audit.getpass',
+            'sawmill.logger.audit.getpass',
             **{'getuser.return_value': 'thesociable'}
         ),
         mock.patch(
-            'mill.logger.audit.time',
+            'sawmill.logger.audit.time',
             **{'time.return_value': now}
         )
     ):
