@@ -6,7 +6,12 @@ import copy
 from collections import MutableMapping
 
 
-class Log(MutableMapping):
+class Log(
+    MutableMapping,
+    dict  # dict is required as some third-party packages, such as pystache,
+          # test using isinstance against dict.
+          # Issue registered at https://github.com/defunkt/pystache/issues/185
+):
     '''Hold individual log data.'''
 
     def __init__(self, *args, **kw):
