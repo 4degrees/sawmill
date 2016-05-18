@@ -2,6 +2,8 @@
     :copyright: Copyright (c) 2013 Martin Pengelly-Phillips
     :license: See LICENSE.txt.
 
+.. _main:
+
 ####
 Mill
 ####
@@ -13,6 +15,7 @@ An alternative Python logging library.
 
     guide/index
     reference/index
+    release/index
     glossary
 
 ******************

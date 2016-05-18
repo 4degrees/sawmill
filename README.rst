@@ -13,7 +13,10 @@ Alternative logging framework for Python:
     >>> logger.info('Hello World!')
     my.mill:info:Hello World!
 
-Find out more by reading the documentation at http://mill.readthedocs.org
+*************
+Documentation
+*************
+Full documentation can be found at http://mill.readthedocs.org
 
 *************
 Issue tracker
