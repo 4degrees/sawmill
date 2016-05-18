@@ -10,8 +10,8 @@ except ImportError:
 
 from mock import Mock
 
-from mill.log import Log
-from mill.handler.stream import Stream
+from sawmill.log import Log
+from sawmill.handler.stream import Stream
 
 
 def test_output():

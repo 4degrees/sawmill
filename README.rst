@@ -1,22 +1,22 @@
-####
-Mill
-####
+#######
+Sawmill
+#######
 
 Alternative logging framework for Python:
 
 .. code-block:: python
 
-    >>> import mill
-    >>> from mill.logger.classic import Classic as Logger
-    >>> mill.configure()
-    >>> logger = Logger('my.mill')
+    >>> import sawmill
+    >>> from sawmill.logger.classic import Classic as Logger
+    >>> sawmill.configure()
+    >>> logger = Logger('my.sawmill')
     >>> logger.info('Hello World!')
-    my.mill:info:Hello World!
+    my.sawmill:info:Hello World!
 
 *************
 Documentation
 *************
-Full documentation can be found at http://mill.readthedocs.org
+Full documentation can be found at http://sawmill.readthedocs.org
 
 *************
 Issue tracker
@@ -24,7 +24,7 @@ Issue tracker
 
 Found a bug? Have an idea on how to make the framework better?
 
-Post it at https://github.com/thesociable/mill/issues
+Post it at https://github.com/thesociable/sawmill/issues
 
 *********************
 Copyright and license

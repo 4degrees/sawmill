@@ -4,9 +4,9 @@
 
 from mock import Mock
 
-from mill.log import Log
-from mill.handler.base import Handler
-from mill.formatter.base import Formatter
+from sawmill.log import Log
+from sawmill.handler.base import Handler
+from sawmill.formatter.base import Formatter
 
 
 class Concrete(Handler):

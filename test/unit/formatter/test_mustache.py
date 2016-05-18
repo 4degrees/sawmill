@@ -4,8 +4,8 @@
 
 import pystache
 
-from mill.log import Log
-from mill.formatter.mustache import Mustache
+from sawmill.log import Log
+from sawmill.formatter.mustache import Mustache
 
 
 def test_format():

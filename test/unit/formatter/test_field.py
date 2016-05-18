@@ -4,8 +4,8 @@
 
 import pytest
 
-from mill.log import Log
-from mill.formatter.field import Field
+from sawmill.log import Log
+from sawmill.formatter.field import Field
 
 
 def test_format():

@@ -4,9 +4,9 @@
 
 .. _main:
 
-####
-Mill
-####
+#######
+Sawmill
+#######
 
 An alternative Python logging library.
 

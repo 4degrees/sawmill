@@ -7,37 +7,37 @@ from StringIO import StringIO
 
 import mock
 
-import mill
-import mill.log
-from mill.configurator import classic
+import sawmill
+import sawmill.log
+from sawmill.configurator import classic
 
 
 def test_classic_configurator_with_no_options():
     '''Test classic configurator when passed no options.'''
     with nested(
         mock.patch('sys.stderr', new_callable=StringIO),
-        mock.patch.dict(mill.root.handlers, clear=True)
+        mock.patch.dict(sawmill.root.handlers, clear=True)
     ) as (stderr, handlers):
-        assert len(mill.root.handlers) == 0
+        assert len(sawmill.root.handlers) == 0
 
         # Check handlers added under expected keys
         classic.configure()
-        assert sorted(mill.root.handlers.keys()) == ['file', 'stderr']
+        assert sorted(sawmill.root.handlers.keys()) == ['file', 'stderr']
 
         # Check stderr handler
         assert stderr.getvalue() == ''
-        log = mill.log.Log(message='Test configurator')
-        mill.root.handle(log)
+        log = sawmill.log.Log(message='Test configurator')
+        sawmill.root.handle(log)
         assert stderr.getvalue() == 'Test configurator\n'
         stderr.truncate(0)
 
-        log = mill.log.Log(message='Test configurator', level='debug')
-        mill.root.handle(log)
+        log = sawmill.log.Log(message='Test configurator', level='debug')
+        sawmill.root.handle(log)
         assert stderr.getvalue() == ''
 
         # Check file handler
-        mill.root.handlers['file'].flush()
-        filepath = mill.root.handlers['file'].stream.name
+        sawmill.root.handlers['file'].flush()
+        filepath = sawmill.root.handlers['file'].stream.name
         with open(filepath, 'r') as file:
             contents = file.read()
             expected = (

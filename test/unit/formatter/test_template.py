@@ -4,8 +4,8 @@
 
 import pytest
 
-from mill.log import Log
-from mill.formatter.template import Template
+from sawmill.log import Log
+from sawmill.formatter.template import Template
 
 
 def test_format():

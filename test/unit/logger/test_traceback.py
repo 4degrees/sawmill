@@ -4,7 +4,7 @@
 
 import mock
 
-from mill.logger.traceback import Traceback
+from sawmill.logger.traceback import Traceback
 
 
 def test_extracting_traceback():
