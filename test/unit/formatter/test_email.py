@@ -44,7 +44,7 @@ def test_format():
     text = datum.get_payload(0)
     assert text.get_payload() == '''# Logs
 
-123456789:test.log:A message
+123456789:test.log:A message  
 
 '''
 
