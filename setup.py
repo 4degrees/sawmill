@@ -66,7 +66,8 @@ setup(
     tests_require=TEST_REQUIRES,
     extras_require={
         'setup': SETUP_REQUIRES,
-        'tests': TEST_REQUIRES
+        'tests': TEST_REQUIRES,
+        'dev': SETUP_REQUIRES + TEST_REQUIRES
     },
     zip_safe=False
 )
