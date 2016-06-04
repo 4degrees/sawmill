@@ -31,6 +31,10 @@ class Log(
         log._mapping = copy.deepcopy(self._mapping)
         return log
 
+    def __repr__(self):
+        '''Return unambiguous representation.'''
+        return '{0}({1!r})'.format(self.__class__.__name__, self._mapping)
+
     def __str__(self):
         '''Return string representation.'''
         return str(self._mapping)
