@@ -2,7 +2,6 @@
 # :copyright: Copyright (c) 2013 Martin Pengelly-Phillips
 # :license: See LICENSE.txt.
 
-import sys
 try:
     from cStringIO import StringIO
 except ImportError:
