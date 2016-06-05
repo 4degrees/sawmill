@@ -2,9 +2,9 @@
     :copyright: Copyright (c) 2013 Martin Pengelly-Phillips
     :license: See LICENSE.txt.
 
-********************************
-:mod:`~sawmill.filterer.pattern`
-********************************
+************************
+sawmill.filterer.pattern
+************************
 
 .. automodule:: sawmill.filterer.pattern
 
