@@ -19,8 +19,8 @@ Here are some examples of how Sawmill differs:
 
 * No explicit hierarchy of loggers. All handlers have the opportunity to
   handle every message by default. However, using the
-  :py:class:`~sawmill.handler.delegate.Delegate` handler you can construct your
-  own handler hierarchy if you want.
+  :py:class:`~sawmill.handler.distribute.Distribute` handler you can construct
+  your own handler hierarchy if you want.
 
 * Log levels are not treated specially. Instead you can filter based on log
   level by adding a :py:class:`~sawmill.filterer.level.Level` filterer to your
