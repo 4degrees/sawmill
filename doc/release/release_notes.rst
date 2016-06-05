@@ -11,6 +11,21 @@ Release Notes
 .. release:: Upcoming
 
     .. change:: changed
+        :tags: documentation
+
+        Simplified documentation structure.
+
+    .. change:: fixed
+        :tags: documentation
+
+        Added missing :ref:`installing` section.
+
+    .. change:: fixed
+        :tags: documentation
+
+        Fixed broken documentation references.
+
+    .. change:: changed
 
         :meth:`Log.__repr__ <sawmill.log.Log.__repr__>` updated to return useful
         and accurate representation of :class:`Log <sawmill.log.Log>` instances.
