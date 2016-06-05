@@ -11,11 +11,13 @@ Sawmill
 An alternative Python logging library.
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 
-    guide/index
+    introduction
     installing
-    reference/index
+    tutorial
+    configuration
+    api_reference/index
     release/index
     license
     glossary

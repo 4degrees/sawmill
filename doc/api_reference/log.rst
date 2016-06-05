@@ -7,4 +7,3 @@ sawmill.log
 ***********
 
 .. automodule:: sawmill.log
-

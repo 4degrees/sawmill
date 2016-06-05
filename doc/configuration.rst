@@ -2,7 +2,7 @@
     :copyright: Copyright (c) 2013 Martin Pengelly-Phillips
     :license: See LICENSE.txt.
 
-.. _guide.configuration:
+.. _configuration:
 
 *************
 Configuration
@@ -14,7 +14,7 @@ for configuring the system. Each one is registered in the
 :py:func:`sawmill.configure` function.
 
 The default configurator is the :py:mod:`~sawmill.configurator.classic` one
-which you would have used in the :ref:`guide.getting_started` guide.
+which you would have used in the :ref:`tutorial`.
 
 .. note::
 

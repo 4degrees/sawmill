@@ -2,11 +2,11 @@
     :copyright: Copyright (c) 2013 Martin Pengelly-Phillips
     :license: See LICENSE.txt.
 
-.. _guide.getting_started:
+.. _tutorial:
 
-***************
-Getting Started
-***************
+********
+Tutorial
+********
 
 Using Sawmill is straightforward::
 
@@ -26,7 +26,7 @@ fashion and then called the main :py:data:`~sawmill.root.handle` method with a
     :py:func:`sawmill.configure` is a helper function that attempts to
     configure Sawmill in a way that is useful to most applications. However,
     there is no requirement to use this helper or the default configurators
-    (see :ref:`guide.configuration`).
+    (see :ref:`configuration`).
 
 Loggers
 =======
