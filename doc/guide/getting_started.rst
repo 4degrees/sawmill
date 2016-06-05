@@ -4,8 +4,9 @@
 
 .. _guide.getting_started:
 
+***************
 Getting Started
-===============
+***************
 
 Using Sawmill is straightforward::
 
@@ -28,7 +29,7 @@ fashion and then called the main :py:data:`~sawmill.root.handle` method with a
     (see :ref:`guide.configuration`).
 
 Loggers
--------
+=======
 
 If you find that you are regularly inputting the same information for each
 log instance then you can create a :py:meth:`~sawmill.logger.base.Logger` to
@@ -56,7 +57,7 @@ standard Python logger behaviour::
     my.logger:error:An error message
 
 Handlers
---------
+========
 
 So, how are those messages ending up on :py:attr:`sys.stderr`? This is because
 the configure function adds a :py:class:`~sawmill.handler.stream.Stream` handler
@@ -93,7 +94,7 @@ The reason it contains just a string representation of the log (dictionary) is
 because no formatter has been set on our custom handler.
 
 Formatters
-----------
+==========
 
 A formatter takes a list of :py:class:`~sawmill.log.Log` instances and returns
 a corresponding list of formatted data that a handler can output. Typically the
@@ -123,7 +124,7 @@ handler *my_handler*::
     info:Yet more information.
 
 Filterers
----------
+=========
 
 A filterer controls whether a log should be handled by a particular handler. A
 typical usage of a filterer is to restrict a particular handler to only handle

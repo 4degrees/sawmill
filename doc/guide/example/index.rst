@@ -4,8 +4,9 @@
 
 .. _guide.example:
 
+********
 Examples
-========
+********
 
 Here you will find various examples for using the system:
 

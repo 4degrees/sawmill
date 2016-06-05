@@ -2,8 +2,9 @@
     :copyright: Copyright (c) 2013 Martin Pengelly-Phillips
     :license: See LICENSE.txt.
 
+************
 Introduction
-============
+************
 
 Sawmill is an alternative to the standard Python logging library
 
@@ -44,6 +45,6 @@ Here are some examples of how Sawmill differs:
 * Follows PEP8.
 
 Installation
-------------
+============
 
 

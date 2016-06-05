@@ -4,8 +4,9 @@
 
 .. _guide.configuration:
 
+*************
 Configuration
-=============
+*************
 
 Sawmill comes with some default *configurators* that are simple helper functions
 for configuring the system. Each one is registered in the
@@ -43,7 +44,7 @@ Before you start make sure you import all the necessary modules:
     :lines: 5-16
 
 User Visible Or High Level To Standard Error
---------------------------------------------
+============================================
 
 First up we need a :py:class:`~sawmill.handler.stream.Stream` handler to direct
 output to :py:attr:`sys.stderr`:
@@ -86,7 +87,7 @@ Next we just need to register this handler under a sensible name like
     :lines: 37
 
 All To File
------------
+===========
 
 Logging everything to a file means we need another
 :py:class:`~sawmill.handler.stream.Stream` handler, but pointing at a file this
@@ -116,7 +117,7 @@ And register that one as well:
     :lines: 52
 
 Errors To Email
----------------
+===============
 
 Finally create an email handler that will send any errors to a predefined
 email address, including a buffer of recent messages. First setup the email
