@@ -14,8 +14,10 @@ An alternative Python logging library.
     :maxdepth: 2
 
     guide/index
+    installing
     reference/index
     release/index
+    license
     glossary
 
 ******************

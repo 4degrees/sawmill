@@ -43,8 +43,3 @@ Here are some examples of how Sawmill differs:
 * Requires Python 2.6 or higher.
 
 * Follows PEP8.
-
-Installation
-============
-
-
