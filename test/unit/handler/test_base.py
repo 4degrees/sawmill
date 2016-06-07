@@ -2,6 +2,7 @@
 # :copyright: Copyright (c) 2013 Martin Pengelly-Phillips
 # :license: See LICENSE.txt.
 
+import mock
 from mock import Mock
 
 from sawmill.log import Log
@@ -16,6 +17,11 @@ class Concrete(Handler):
         '''Initialise handler.'''
         super(Concrete, self).__init__(*args, **kw)
         self.data = []
+        self.teardown_called = 0
+
+    def teardown(self):
+        '''Teardown handler.'''
+        self.teardown_called += 1
 
     def output(self, data):
         '''Output formatted *data*.'''
@@ -65,3 +71,16 @@ def test_formatter():
     handler.handle(log)
 
     assert handler.data == ['message=A message']
+
+
+def test_auto_teardown_on_exit():
+    '''Call teardown automatically on exit.'''
+    registry = []
+    with mock.patch('atexit.register', new=registry.append):
+        handler = Concrete(formatter=Field())
+
+    # Manually call registered exit functions.
+    for entry in registry:
+        entry()
+
+    assert handler.teardown_called

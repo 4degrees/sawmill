@@ -8,7 +8,6 @@ except ImportError:
     from StringIO import StringIO
 
 from mock import Mock
-import mock
 
 from sawmill.log import Log
 from sawmill.handler.stream import Stream
@@ -56,17 +55,21 @@ def test_flush_when_unsupported_by_stream():
     stream.flush()
 
 
-def test_auto_flush_on_exit():
-    '''Test flush is called automatically on exit.'''
-    target = Mock()
+def test_teardown_open_stream():
+    '''Teardown open stream.'''
+    target = StringIO()
 
-    registry = []
-    with mock.patch('atexit.register', new=registry.append):
-        stream = Stream(stream=target)
-        stream.flush = Mock()
+    stream = Stream(stream=target)
+    stream.output(['test'])
+    stream.teardown()
 
-    # Manually call registered exit functions.
-    for entry in registry:
-        entry()
+    assert not target.closed
+    assert target.getvalue() == 'test'
 
-    assert stream.flush.called
+
+def test_teardown_closed_stream():
+    '''Teardown closed stream without error.'''
+    target = StringIO()
+    stream = Stream(stream=target)
+    target.close()
+    stream.teardown()

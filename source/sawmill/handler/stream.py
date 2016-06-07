@@ -23,7 +23,12 @@ class Stream(Handler):
 
     def teardown(self):
         '''Teardown handler.'''
-        self.flush()
+        try:
+            self.flush()
+        except (ValueError, IOError):
+            # Ignore errors caused by streams that have been closed without
+            # corresponding references cleaned up prior to teardown.
+            pass
 
     def flush(self):
         '''Explicitly flush the stream if supported.'''
@@ -38,4 +43,3 @@ class Stream(Handler):
         '''
         for datum in data:
             self.stream.write(datum)
-
