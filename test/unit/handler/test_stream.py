@@ -53,3 +53,11 @@ def test_flush_when_unsupported_by_stream():
     )
 
     stream.flush()
+
+
+def test_teardown_closed_stream():
+    '''Teardown closed stream without error.'''
+    target = StringIO()
+    stream = Stream(stream=target)
+    target.close()
+    stream.teardown()
