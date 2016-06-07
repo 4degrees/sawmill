@@ -10,6 +10,13 @@ Release Notes
 
 .. release:: Upcoming
 
+    .. change:: fixed
+
+        Exceptions raised on
+        :meth:`~sawmill.handler.stream.Stream.teardown` of
+        :class:`~sawmill.handler.stream.Stream` handler if underlying stream was
+        already closed as part of cleanup process.
+
     .. change:: changed
         :tags: documentation
 
