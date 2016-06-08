@@ -8,7 +8,8 @@
 Release Notes
 *************
 
-.. release:: Upcoming
+.. release:: 0.1.1
+    :date: 2016-06-08
 
     .. change:: fixed
 
