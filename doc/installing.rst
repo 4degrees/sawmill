@@ -23,10 +23,10 @@ Building from source
 
 You can also build manually from the source for more control. First obtain a
 copy of the source by either `downloading
-<https://github.com/4degrees/sawmill/zipball/master>`_ or cloning the public
-repository::
+<https://gitlab.com/4degrees/sawmill/repository/archive.zip?ref=master>`_ or
+cloning the public repository::
 
-    $ git clone https://github.com/4degrees/sawmill
+    $ git clone git@gitlab.com:4degrees/sawmill.git
 
 Then you can build and install the package into your current Python
 site-packages folder::

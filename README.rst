@@ -24,7 +24,7 @@ Issue tracker
 
 Found a bug? Have an idea on how to make the framework better?
 
-Post it at https://github.com/4degrees/sawmill/issues
+Post it at https://gitlab.com/4degrees/sawmill/issues
 
 *********************
 Copyright and license

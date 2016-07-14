@@ -52,7 +52,7 @@ setup(
     description='Alternative logging framework for Python',
     long_description=open(README_PATH).read(),
     keywords='logging',
-    url='http://github.com/4degrees/sawmill',
+    url='http://gitlab.com/4degrees/sawmill',
     author='Martin Pengelly-Phillips',
     author_email='martin@4degrees.ltd.uk',
     license='Apache License (2.0)',
